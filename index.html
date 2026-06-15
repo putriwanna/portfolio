@@ -98,6 +98,85 @@
       opacity: 0.7;
     }
 
+    /* ── LSP PHOTO STRIP ── */
+    .lsp-strip {
+      grid-column: 1 / -1;
+      position: relative;
+      display: block;
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .lsp-photos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 220px;
+      gap: 3px;
+    }
+    .lsp-slot {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+    }
+    .lsp-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+      display: block;
+    }
+    .lsp-strip:hover .lsp-slot img {
+      transform: scale(1.05);
+    }
+    .lsp-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.25);
+      font-size: 1.8rem;
+    }
+    .lsp-placeholder span:last-child {
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .lsp-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 18px 24px;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .lsp-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .lsp-cta {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+    .lsp-strip:hover .lsp-cta { color: #fff; }
+    @media (max-width: 600px) {
+      .lsp-photos { grid-template-columns: repeat(2, 1fr); height: 180px; }
+      .lsp-slot:nth-child(n+3) { display: none; }
+    }
+
     nav ul {
       list-style: none;
       display: flex;
@@ -495,7 +574,6 @@
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
-      <li><a href="#expertise">Expertise</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -508,7 +586,6 @@
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
-      <li><a href="#expertise">Expertise</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
     </ul>
   </div>
@@ -619,37 +696,13 @@
         </div>
 
         <div class="edu-card">
-          <div class="edu-ghost">BA</div>
-          <span class="edu-badge">B.A.</span>
+          <div class="edu-ghost">BSc</div>
+          <span class="edu-badge">B.Sc.</span>
           <div class="edu-degree">Accounting and Finance</div>
           <div class="edu-school">University of Bradford</div>
           <div class="edu-year">2009 – 2011</div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERTISE -->
-  <section id="expertise">
-    <div class="section-inner">
-      <div class="section-label" style="color: var(--maroon);">Skills &amp; Focus Areas</div>
-      <h2>Areas of Expertise</h2>
-      <div class="chips">
-        <span class="chip chip-coral">Learning Support (ILP/SSP)</span>
-        <span class="chip chip-coral">Inclusive Education</span>
-        <span class="chip chip-teal">IB PYP Framework</span>
-        <span class="chip chip-teal">Literacy Intervention</span>
-        <span class="chip chip-teal">Math Group Intervention</span>
-        <span class="chip chip-yellow">Executive Functioning Skills</span>
-        <span class="chip chip-yellow">ATL Skills Coaching</span>
-        <span class="chip chip-yellow">Parent &amp; Teacher Workshops</span>
-        <span class="chip chip-purple">Neurodiversity-Affirming Practice</span>
-        <span class="chip chip-purple">Technology Integration</span>
-        <span class="chip chip-purple">AI in Education</span>
-        <span class="chip chip-coral">Phonics &amp; Early Literacy</span>
-        <span class="chip chip-teal">Student Wellbeing</span>
-        <span class="chip chip-yellow">Middle Leadership</span>
       </div>
     </div>
   </section>
@@ -751,6 +804,19 @@
       <h2>Professional Portfolio</h2>
       <div class="portfolio-grid">
 
+        <a href="in-practice.html" class="lsp-strip">
+          <div class="lsp-photos">
+            <div class="lsp-slot"><div class="lsp-placeholder"><span>📷</span><span>Photo coming soon</span></div></div>
+            <div class="lsp-slot"><div class="lsp-placeholder"><span>📷</span><span>Photo coming soon</span></div></div>
+            <div class="lsp-slot"><div class="lsp-placeholder"><span>📷</span><span>Photo coming soon</span></div></div>
+            <div class="lsp-slot"><div class="lsp-placeholder"><span>📷</span><span>Photo coming soon</span></div></div>
+          </div>
+          <div class="lsp-overlay">
+            <div class="lsp-label">🏫 Learning Support in Practice</div>
+            <div class="lsp-cta">Explore gallery →</div>
+          </div>
+        </a>
+
         <a href="goals.html" class="portfolio-card">
           <div class="portfolio-card-icon">🎯</div>
           <div class="portfolio-card-title">Learning Support Goals</div>
@@ -779,18 +845,18 @@
           <span class="portfolio-card-arrow">View evidences →</span>
         </a>
 
-        <a href="in-practice.html" class="portfolio-card">
-          <div class="portfolio-card-icon">🏫</div>
-          <div class="portfolio-card-title">Learning Support in Practice</div>
-          <div class="portfolio-card-desc">A photo gallery of learning support in action — student interventions, skill-building activities, and classroom evidence.</div>
-          <span class="portfolio-card-arrow">View gallery →</span>
-        </a>
-
         <a href="collaboration.html" class="portfolio-card">
           <div class="portfolio-card-icon">🤝</div>
           <div class="portfolio-card-title">Collaboration &amp; Community</div>
           <div class="portfolio-card-desc">Workshops, school events, and team partnerships — building inclusive education beyond the learning support room.</div>
           <span class="portfolio-card-arrow">View collaboration →</span>
+        </a>
+
+        <a href="iste.html" class="portfolio-card">
+          <div class="portfolio-card-icon">📐</div>
+          <div class="portfolio-card-title">ISTE Standards</div>
+          <div class="portfolio-card-desc">Applying the ISTE Standards for Educators framework — integrating technology purposefully into learning support practice.</div>
+          <span class="portfolio-card-arrow">View ISTE →</span>
         </a>
 
       </div>
@@ -821,6 +887,25 @@
         hamburger.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // ── LSP Photo Strip Randomizer ──
+    // Add photo filenames here as images are uploaded to the images/ folder
+    const lspPhotos = [
+      // 'images/lsp-1.jpg',
+      // 'images/lsp-2.jpg',
+      // 'images/lsp-3.jpg',
+      // 'images/lsp-4.jpg',
+    ];
+    if (lspPhotos.length) {
+      const shuffled = [...lspPhotos].sort(() => Math.random() - 0.5);
+      document.querySelectorAll('.lsp-slot').forEach((slot, i) => {
+        const src = shuffled[i % shuffled.length];
+        const img = new Image();
+        img.src = src;
+        img.alt = 'Learning Support in Practice';
+        img.onload = () => { slot.innerHTML = ''; slot.appendChild(img); };
+      });
+    }
   </script>
 
 </body>
