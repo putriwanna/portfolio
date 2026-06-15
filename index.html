@@ -11,19 +11,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --coral:   #FF6B6B;
-      --coral-light: #FFF0F0;
-      --teal:    #4ECDC4;
-      --teal-light: #E8FAF9;
-      --yellow:  #FFD93D;
-      --yellow-light: #FFFBEA;
-      --lavender: #A29BFE;
-      --bg:      #FFFBF5;
-      --card:    #FFFFFF;
-      --text:    #2D3436;
-      --muted:   #636E72;
-      --border:  #EEE9E2;
-      --radius:  14px;
+      --maroon-dark:  #310004;
+      --maroon:       #59090F;
+      --maroon-mid:   #4B090E;
+      --maroon-light: #5D1218;
+      --maroon-pale:  #F9F0F1;
+      --bg:           #FDFAF9;
+      --card:         #FFFFFF;
+      --text:         #1C0A0B;
+      --muted:        #6B4B4E;
+      --border:       #EAD9DA;
+      --radius:       14px;
     }
 
     body {
@@ -38,9 +36,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255,251,245,0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
+      background: var(--maroon-dark);
       padding: 0 5%;
       display: flex;
       align-items: center;
@@ -51,8 +47,56 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--coral);
+      color: #fff;
     }
+    /* ── PORTFOLIO SECTION ── */
+    #portfolio { background: var(--maroon-dark); }
+    #portfolio h2 { color: #fff; }
+    #portfolio .section-label { color: rgba(255,255,255,0.55); }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .portfolio-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      text-decoration: none;
+      color: #fff;
+      display: block;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .portfolio-card:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-3px);
+    }
+    .portfolio-card-icon {
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+    }
+    .portfolio-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .portfolio-card-desc {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      line-height: 1.5;
+    }
+    .portfolio-card-arrow {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
     nav ul {
       list-style: none;
       display: flex;
@@ -62,43 +106,44 @@
       text-decoration: none;
       font-size: 0.875rem;
       font-weight: 500;
-      color: var(--muted);
+      color: rgba(255,255,255,0.7);
       transition: color 0.2s;
     }
-    nav a:hover { color: var(--coral); }
+    nav a:hover { color: #fff; }
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 40%, #4ECDC4 100%);
-      color: #fff;
-      padding: 100px 5% 90px;
       position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
       overflow: hidden;
+      background: var(--maroon-dark);
     }
-    .hero::before {
-      content: '';
+    .hero-bg {
       position: absolute;
-      top: -60px; right: -60px;
-      width: 320px; height: 320px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 50%;
+      inset: 0;
+      background: url('images/hero.jpeg') center center / cover no-repeat;
+      z-index: 0;
     }
-    .hero::after {
-      content: '';
+    .hero-overlay {
       position: absolute;
-      bottom: -80px; left: 30%;
-      width: 220px; height: 220px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 50%;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(49,0,4,0.55) 0%, rgba(49,0,4,0.72) 100%);
+      z-index: 1;
     }
     .hero-inner {
-      max-width: 760px;
       position: relative;
-      z-index: 1;
+      z-index: 2;
+      max-width: 760px;
+      padding: 0 5%;
     }
     .hero-tag {
       display: inline-block;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.35);
       border-radius: 100px;
       padding: 4px 14px;
@@ -110,8 +155,8 @@
     }
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 5vw, 3.8rem);
-      line-height: 1.18;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.1;
       margin-bottom: 16px;
     }
     .hero-role {
@@ -122,11 +167,26 @@
     }
     .hero-quote {
       font-style: italic;
-      opacity: 0.85;
+      opacity: 0.8;
       font-size: 0.95rem;
-      border-left: 3px solid rgba(255,255,255,0.5);
-      padding-left: 14px;
       max-width: 520px;
+      margin: 0 auto 36px;
+    }
+    .hero-btn {
+      display: inline-block;
+      border: 2px solid rgba(255,255,255,0.85);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 36px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+    .hero-btn:hover {
+      background: #fff;
+      color: var(--maroon);
     }
 
     /* ── SECTIONS ── */
@@ -152,13 +212,13 @@
     }
 
     /* ── ABOUT ── */
-    #about { background: var(--teal-light); }
+    #about { background: var(--maroon-pale); }
     .about-card {
       background: var(--card);
       border-radius: var(--radius);
       padding: 36px 40px;
-      box-shadow: 0 2px 20px rgba(78,205,196,0.1);
-      border: 1px solid #C8F5F2;
+      box-shadow: 0 2px 20px rgba(89,9,15,0.08);
+      border: 1px solid var(--border);
     }
     .about-card p {
       font-size: 1.05rem;
@@ -169,13 +229,11 @@
     .motto {
       display: inline-block;
       margin-top: 20px;
-      background: linear-gradient(90deg, var(--coral), var(--teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--maroon);
       font-family: 'Playfair Display', serif;
       font-size: 1.25rem;
       font-style: italic;
+      font-weight: 700;
     }
 
     /* ── EXPERIENCE ── */
@@ -186,11 +244,11 @@
       border-radius: var(--radius);
       padding: 28px 32px;
       border: 1px solid var(--border);
-      border-left: 4px solid var(--coral);
+      border-left: 4px solid var(--maroon);
       transition: box-shadow 0.2s, transform 0.2s;
     }
     .job:hover {
-      box-shadow: 0 6px 28px rgba(255,107,107,0.12);
+      box-shadow: 0 6px 28px rgba(89,9,15,0.12);
       transform: translateX(4px);
     }
     .job-title {
@@ -201,7 +259,7 @@
     }
     .job-org {
       font-weight: 500;
-      color: var(--coral);
+      color: var(--maroon);
       font-size: 0.95rem;
     }
     .job-meta {
@@ -216,7 +274,7 @@
     }
 
     /* ── EDUCATION ── */
-    #education { background: var(--yellow-light); }
+    #education { background: var(--bg); }
     .edu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -226,8 +284,8 @@
       background: var(--card);
       border-radius: var(--radius);
       padding: 28px 30px;
-      border: 1px solid #F0E5B0;
-      border-top: 4px solid var(--yellow);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--maroon);
     }
     .edu-degree {
       font-weight: 600;
@@ -235,7 +293,7 @@
       margin-bottom: 4px;
     }
     .edu-school {
-      color: #C9960C;
+      color: var(--maroon);
       font-weight: 500;
       font-size: 0.93rem;
     }
@@ -247,13 +305,13 @@
     .edu-grade {
       display: inline-block;
       margin-top: 10px;
-      background: var(--yellow-light);
-      border: 1px solid #FFD93D;
+      background: var(--maroon-pale);
+      border: 1px solid #C9868B;
       border-radius: 100px;
       padding: 2px 10px;
       font-size: 0.78rem;
       font-weight: 600;
-      color: #9A7200;
+      color: var(--maroon);
     }
 
     /* ── EXPERTISE ── */
@@ -270,13 +328,13 @@
       font-weight: 500;
       border: 1.5px solid transparent;
     }
-    .chip-coral  { background: var(--coral-light); color: #C0392B; border-color: #FFCDD2; }
-    .chip-teal   { background: var(--teal-light);  color: #00796B; border-color: #B2DFDB; }
-    .chip-yellow { background: var(--yellow-light); color: #8A6500; border-color: #FFE082; }
-    .chip-purple { background: #F3F0FF; color: #5E35B1; border-color: #D1C4E9; }
+    .chip-coral  { background: #F9F0F1; color: #59090F; border-color: #D9A0A4; }
+    .chip-teal   { background: #EFF5F0; color: #1F4D2B; border-color: #9DC4A8; }
+    .chip-yellow { background: #F0F4FA; color: #1A3358; border-color: #90AECE; }
+    .chip-purple { background: #FAF7F0; color: #5C3C1E; border-color: #D4B896; }
 
     /* ── CERTIFICATIONS ── */
-    #certifications { background: #F8F4FF; }
+    #certifications { background: var(--maroon-pale); }
     .cert-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -286,7 +344,7 @@
       background: var(--card);
       border-radius: var(--radius);
       padding: 20px 22px;
-      border: 1px solid #DDD6FE;
+      border: 1px solid var(--border);
       display: flex;
       gap: 14px;
       align-items: flex-start;
@@ -295,7 +353,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--lavender);
+      background: var(--maroon);
       margin-top: 6px;
       flex-shrink: 0;
     }
@@ -311,7 +369,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: var(--text);
+      background: var(--maroon-dark);
       color: rgba(255,255,255,0.65);
       text-align: center;
       padding: 40px 5%;
@@ -319,7 +377,7 @@
     }
     footer strong { color: #fff; }
     footer a {
-      color: var(--teal);
+      color: #E8A0A5;
       text-decoration: none;
     }
     footer a:hover { text-decoration: underline; }
@@ -341,24 +399,28 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
     <div class="hero-inner">
       <div class="hero-tag">Learning Support Educator · Shenzhen, China</div>
       <h1>Putri Wanna</h1>
       <p class="hero-role">Head of Learning Support &amp; LPYP Learning Support Teacher<br>
         International School of Nanshan Shenzhen</p>
       <p class="hero-quote">"An investment in knowledge pays the best interest." — Benjamin Franklin</p>
+      <a href="#about" class="hero-btn">Explore My Portfolio</a>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section id="about">
     <div class="section-inner">
-      <div class="section-label" style="color: var(--teal);">Who I Am</div>
+      <div class="section-label" style="color: var(--maroon);">Who I Am</div>
       <h2>Championing every learner's journey</h2>
       <div class="about-card">
         <p>I aim to support students to reach their full potential as successful, empowered learners within an inclusive educational environment.</p>
@@ -372,7 +434,7 @@
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="section-inner">
-      <div class="section-label" style="color: var(--coral);">Career</div>
+      <div class="section-label" style="color: var(--maroon);">Career</div>
       <h2>Professional Experience</h2>
       <div class="timeline">
 
@@ -404,7 +466,7 @@
   <!-- EDUCATION -->
   <section id="education">
     <div class="section-inner">
-      <div class="section-label" style="color: #C9960C;">Academic Background</div>
+      <div class="section-label" style="color: var(--maroon);">Academic Background</div>
       <h2>Education</h2>
       <div class="edu-grid">
 
@@ -439,7 +501,7 @@
   <!-- EXPERTISE -->
   <section id="expertise">
     <div class="section-inner">
-      <div class="section-label" style="color: var(--coral);">Skills &amp; Focus Areas</div>
+      <div class="section-label" style="color: var(--maroon);">Skills &amp; Focus Areas</div>
       <h2>Areas of Expertise</h2>
       <div class="chips">
         <span class="chip chip-coral">Learning Support (ILP/SSP)</span>
@@ -463,21 +525,21 @@
   <!-- CERTIFICATIONS -->
   <section id="certifications">
     <div class="section-inner">
-      <div class="section-label" style="color: var(--lavender);">Continuing Education</div>
+      <div class="section-label" style="color: var(--maroon);">Continuing Education</div>
       <h2>Certifications &amp; Professional Development</h2>
       <div class="cert-list">
         <div class="cert-item">
           <div class="cert-dot"></div>
           <div>
-            <div class="cert-name">Leading Inclusive Communities – Neurodivergent</div>
-            <div class="cert-issuer">PD Academia · 2026</div>
+            <div class="cert-name">AI in the Classroom</div>
+            <div class="cert-issuer">Canva · Apr 2026</div>
           </div>
         </div>
         <div class="cert-item">
           <div class="cert-dot"></div>
           <div>
-            <div class="cert-name">AI in the Classroom</div>
-            <div class="cert-issuer">Canva · Apr 2026</div>
+            <div class="cert-name">Leading Inclusive Communities – Neurodivergent</div>
+            <div class="cert-issuer">PD Academia · 2026</div>
           </div>
         </div>
         <div class="cert-item">
@@ -490,24 +552,105 @@
         <div class="cert-item">
           <div class="cert-dot"></div>
           <div>
+            <div class="cert-name">SEL for Students: A Path to Social Emotional Well-Being</div>
+            <div class="cert-issuer">University of Colorado Boulder · Oct 2024</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Motivating Gen Z Learners: What Parents and Teachers Need to Know</div>
+            <div class="cert-issuer">Nanyang Technological University Singapore · Aug 2024</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">ADHD: Everyday Strategies for Elementary Students</div>
+            <div class="cert-issuer">University at Buffalo · Jul 2024</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Diversity and Inclusion in Education</div>
+            <div class="cert-issuer">University of Glasgow · Jun 2024</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">International Post Graduate Certificate of Education (iPGCE)</div>
+            <div class="cert-issuer">University of Derby · Dec 2023</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">SENIA Certified Level 1</div>
+            <div class="cert-issuer">SENIA International · Mar 2023</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Teaching English as a Foreign Language (TEFL)</div>
+            <div class="cert-issuer">The TEFL Org · Dec 2021</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">PPEI – Pendidikan dan Pelatihan Ekspor Indonesia</div>
+            <div class="cert-issuer">Export Training &amp; Education</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
             <div class="cert-name">Executive Function Skills – Untapped Learning</div>
             <div class="cert-issuer">Professional Development · 2025–2026</div>
           </div>
         </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">SST Middle Leadership Observation &amp; Reflection</div>
-            <div class="cert-issuer">ISNS · 2025–2026</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">IB Educator Capabilities for Middle Leaders</div>
-            <div class="cert-issuer">International School of Nanshan Shenzhen · 2025–2026</div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="section-inner">
+      <div class="section-label">My Work</div>
+      <h2>Professional Portfolio</h2>
+      <div class="portfolio-grid">
+
+        <a href="goals.html" class="portfolio-card">
+          <div class="portfolio-card-icon">🎯</div>
+          <div class="portfolio-card-title">Learning Support Goals</div>
+          <div class="portfolio-card-desc">SMART goals and annual reflections on my learning support practice — tracked year by year.</div>
+          <span class="portfolio-card-arrow">View goals →</span>
+        </a>
+
+        <a href="observations.html" class="portfolio-card">
+          <div class="portfolio-card-icon">🔍</div>
+          <div class="portfolio-card-title">Professional Observation Notes</div>
+          <div class="portfolio-card-desc">Formal observations by school leadership and the Learning Support team, with reflections.</div>
+          <span class="portfolio-card-arrow">View observations →</span>
+        </a>
+
+        <a href="professional-development.html" class="portfolio-card">
+          <div class="portfolio-card-icon">📚</div>
+          <div class="portfolio-card-title">Professional Development</div>
+          <div class="portfolio-card-desc">Courses, workshops, and training undertaken to grow as an inclusive educator and leader.</div>
+          <span class="portfolio-card-arrow">View development →</span>
+        </a>
+
+        <a href="ib-capabilities.html" class="portfolio-card">
+          <div class="portfolio-card-icon">🌍</div>
+          <div class="portfolio-card-title">Evidences of IB Educator Capabilities</div>
+          <div class="portfolio-card-desc">Artefacts demonstrating the IB educator capabilities across communication, collaboration, and middle leadership.</div>
+          <span class="portfolio-card-arrow">View evidences →</span>
+        </a>
+
       </div>
     </div>
   </section>
@@ -517,8 +660,6 @@
     <p style="margin-top:6px;">International School of Nanshan Shenzhen · Shenzhen, China</p>
     <p style="margin-top:12px;">
       <a href="https://www.linkedin.com/in/putri-wanna/" target="_blank" rel="noopener">LinkedIn</a>
-      &nbsp;·&nbsp;
-      <a href="https://padlet.com/putriwanna/putri-wanna-s-professional-portfolio-10qqm8h8epom6bmv" target="_blank" rel="noopener">Professional Portfolio (Padlet)</a>
     </p>
     <p style="margin-top:20px; font-size:0.75rem; opacity:0.5;">© 2026 Putri Wanna</p>
   </footer>
