@@ -295,6 +295,65 @@
       .hamburger { display: flex; }
     }
 
+    /* ── GOALS ── */
+    .goals-group { margin-bottom: 40px; }
+    .goals-group-heading {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .goals-list { display: flex; flex-direction: column; }
+    .goal-item {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 0 16px;
+      padding: 18px 0;
+      border-top: 1px solid var(--border);
+      align-items: start;
+    }
+    .goals-list .goal-item:last-child { border-bottom: 1px solid var(--border); }
+    .goal-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1.65;
+      text-align: right;
+    }
+    .goal-text {
+      font-size: 0.935rem;
+      color: var(--text);
+      line-height: 1.75;
+      padding-top: 3px;
+    }
+    .goal-label { font-weight: 600; color: var(--maroon); }
+
+    /* Reflection block */
+    .reflection-card {
+      background: var(--maroon-pale);
+      border-left: 3px solid var(--maroon);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .reflection-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--maroon);
+      margin-bottom: 12px;
+    }
+    .reflection-card p {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .reflection-card p:last-child { margin-bottom: 0; }
+
     /* ── FOOTER ── */
     footer {
       background: var(--maroon-dark);
@@ -348,6 +407,8 @@
   <div class="tabs-bar">
     <button class="tab-btn active" onclick="showYear('y2526', this)">2025–2026</button>
     <button class="tab-btn" onclick="showYear('y2425', this)">2024–2025</button>
+    <button class="tab-btn" onclick="showYear('y2324', this)">2023–2024</button>
+    <button class="tab-btn" onclick="showYear('y2223', this)">2022–2023</button>
   </div>
 
   <div class="content">
@@ -355,30 +416,118 @@
     <!-- 2025–2026 -->
     <div id="y2526" class="year-panel active">
       <div class="section-title">Academic Year 2025–2026</div>
-      <div class="artifact-grid">
 
-        <a href="documents/smart-goal-guide-2526.pdf" class="artifact-card" target="_blank" rel="noopener">
-          <div class="artifact-card-icon">📋</div>
-          <div class="artifact-card-title">SMART Goal Guide 2025–2026</div>
-          <div class="artifact-card-meta">Goal framework · 2025</div>
-          <span class="artifact-card-link">Open document →</span>
-        </a>
+      <div class="reflection-card">
+        <h3>Reflection on SMART Goals 2025–2026</h3>
+        <p>I have successfully met both my strategic plan and self-directed goals for this year. I facilitated two parent workshops for LPYP parents — on Learning Engagement and Declarative Language.</p>
+        <p>In addition, I led a professional development session for PYP teachers on optimising interventions and accommodations for students with ILPs/SSPs.</p>
+      </div>
 
+      <div class="goals-group">
+        <div class="goals-group-heading">Professional Goals</div>
+        <div class="goals-list">
+          <div class="goal-item">
+            <div class="goal-number">1</div>
+            <div class="goal-text">Conduct at least one parent workshop per semester.</div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-number">2</div>
+            <div class="goal-text">Teacher-focused workshop (once per year).</div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-number">3</div>
+            <div class="goal-text">Explicit ATL and/or LP teaching and use of verbiage during interventions.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="goals-group">
+        <div class="goals-group-heading">Documents</div>
+        <div class="artifact-grid">
+          <a href="documents/smart-goal-guide-2526.pdf" class="artifact-card" target="_blank" rel="noopener">
+            <div class="artifact-card-icon">📋</div>
+            <div class="artifact-card-title">SMART Goal Guide 2025–2026</div>
+            <div class="artifact-card-meta">Goal framework · 2025</div>
+            <span class="artifact-card-link">Open document →</span>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- 2024–2025 -->
     <div id="y2425" class="year-panel">
       <div class="section-title">Academic Year 2024–2025</div>
-      <div class="artifact-grid">
 
-        <a href="documents/smart-goal-guide-2425.pdf" class="artifact-card" target="_blank" rel="noopener">
-          <div class="artifact-card-icon">📋</div>
-          <div class="artifact-card-title">SMART Goal Guide 2024–2025</div>
-          <div class="artifact-card-meta">Goal framework · 2024</div>
-          <span class="artifact-card-link">Open document →</span>
-        </a>
+      <div class="goals-group">
+        <div class="goals-group-heading">Professional Goals</div>
+        <div class="goals-list">
+          <div class="goal-item">
+            <div class="goal-number">1</div>
+            <div class="goal-text"><span class="goal-label">Excellence in Teaching and Learning</span> – Provide teachers with relevant and individualised student data related to their specific goals.</div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-number">2</div>
+            <div class="goal-text"><span class="goal-label">Building Community Partnership</span> – Conduct parent workshops to enhance LS feasibility for parents and caregivers.</div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-number">3</div>
+            <div class="goal-text"><span class="goal-label">Implement ISTE Standards for Educators</span> – Facilitate learning with technology to support students' needs (e.g. AI, UFLI, RAZ Kids, POE, DeepSeek).</div>
+          </div>
+        </div>
+      </div>
 
+      <div class="goals-group">
+        <div class="goals-group-heading">Documents</div>
+        <div class="artifact-grid">
+          <a href="documents/smart-goal-guide-2425.pdf" class="artifact-card" target="_blank" rel="noopener">
+            <div class="artifact-card-icon">📋</div>
+            <div class="artifact-card-title">SMART Goal Guide 2024–2025</div>
+            <div class="artifact-card-meta">Goal framework · 2024</div>
+            <span class="artifact-card-link">Open document →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2023–2024 -->
+    <div id="y2324" class="year-panel">
+      <div class="section-title">Academic Year 2023–2024</div>
+
+      <div class="goals-group">
+        <div class="goals-group-heading">Goals</div>
+        <div class="goals-list">
+          <div class="goal-item">
+            <div class="goal-number">1</div>
+            <div class="goal-text">Help math group students to improve their math accuracy and fluency skills.</div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-number">2</div>
+            <div class="goal-text">Share ATL skills with students and encourage them to apply and share two ATL skills used during the intervention.</div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-number">3</div>
+            <div class="goal-text">Provide students with technological apps as one of their learning tools.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2022–2023 -->
+    <div id="y2223" class="year-panel">
+      <div class="section-title">Academic Year 2022–2023</div>
+
+      <div class="goals-group">
+        <div class="goals-group-heading">Goals</div>
+        <div class="goals-list">
+          <div class="goal-item">
+            <div class="goal-number">1</div>
+            <div class="goal-text">Build strong relationships with my learning support students.</div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-number">2</div>
+            <div class="goal-text">Improve academic (literacy) and non-academic (executive functioning) skills to help students meet their learning goals as written in the SSP/ILP.</div>
+          </div>
+        </div>
       </div>
     </div>
 

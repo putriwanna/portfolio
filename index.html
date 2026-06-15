@@ -238,81 +238,82 @@
     }
 
     /* ── EXPERIENCE ── */
-    #experience { background: var(--bg); }
-    .timeline { display: flex; flex-direction: column; gap: 24px; }
-    .job {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--maroon);
-      transition: box-shadow 0.2s, transform 0.2s;
+    #experience { background: var(--maroon-pale); }
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 120px; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
     }
-    .job:hover {
-      box-shadow: 0 6px 28px rgba(89,9,15,0.12);
-      transform: translateX(4px);
+    .tl-item {
+      display: grid; grid-template-columns: 120px 1fr;
+      gap: 0 48px; padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
     }
-    .job-title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 4px;
+    .tl-item:first-child { padding-top: 0; }
+    .tl-item::before {
+      content: '';
+      position: absolute; left: 116px; top: 40px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--maroon); border: 2px solid var(--maroon-pale);
     }
-    .job-org {
-      font-weight: 500;
-      color: var(--maroon);
-      font-size: 0.95rem;
+    .tl-item:first-child::before { top: 4px; }
+    .tl-year {
+      font-size: 0.72rem; font-weight: 600; color: var(--muted);
+      letter-spacing: 0.06em; padding-top: 4px;
+      text-align: right; padding-right: 48px; line-height: 1.6;
     }
-    .job-meta {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 4px;
+    .tl-org {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--maroon); margin-bottom: 10px;
     }
-    .job-desc {
-      margin-top: 12px;
-      font-size: 0.93rem;
-      color: var(--muted);
-    }
+    .tl-roles { display: flex; flex-direction: column; gap: 8px; }
+    .tl-role { font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.35; }
 
     /* ── EDUCATION ── */
     #education { background: var(--bg); }
     .edu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
     }
     .edu-card {
       background: var(--card);
-      border-radius: var(--radius);
-      padding: 28px 30px;
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--maroon);
+      border-top: 3px solid var(--maroon);
+      padding: 36px 32px;
+      position: relative; overflow: hidden;
+    }
+    .edu-ghost {
+      position: absolute; bottom: -10px; right: -8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem; font-weight: 700;
+      color: var(--maroon-pale); line-height: 1;
+      pointer-events: none; user-select: none;
+      z-index: 0;
+    }
+    .edu-badge {
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.14em; color: var(--maroon);
+      border: 1.5px solid var(--maroon); padding: 3px 10px;
+      margin-bottom: 20px;
+      position: relative; z-index: 1;
     }
     .edu-degree {
-      font-weight: 600;
-      font-size: 0.98rem;
-      margin-bottom: 4px;
+      font-size: 0.97rem; font-weight: 600; line-height: 1.45;
+      color: var(--text); margin-bottom: 10px;
+      position: relative; z-index: 1;
     }
-    .edu-school {
-      color: var(--maroon);
-      font-weight: 500;
-      font-size: 0.93rem;
-    }
-    .edu-year {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
+    .edu-school { font-size: 0.85rem; color: var(--muted); position: relative; z-index: 1; }
+    .edu-year { font-size: 0.78rem; color: var(--muted); margin-top: 10px; position: relative; z-index: 1; }
     .edu-grade {
-      display: inline-block;
-      margin-top: 10px;
+      display: inline-block; margin-top: 10px;
       background: var(--maroon-pale);
       border: 1px solid #C9868B;
       border-radius: 100px;
       padding: 2px 10px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--maroon);
+      font-size: 0.78rem; font-weight: 600; color: var(--maroon);
+      position: relative; z-index: 1;
     }
 
     /* ── EXPERTISE ── */
@@ -336,36 +337,64 @@
 
     /* ── CERTIFICATIONS ── */
     #certifications { background: var(--maroon-pale); }
-    .cert-list {
+    .cert-cols {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 60px;
+      align-items: start;
     }
-    .cert-item {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 20px 22px;
-      border: 1px solid var(--border);
+    .cert-col {
       display: flex;
-      gap: 14px;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 36px;
     }
-    .cert-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--maroon);
-      margin-top: 6px;
+    .cert-cat-head {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--maroon);
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 14px;
+    }
+    .cert-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .cert-items li {
+      font-size: 0.875rem;
+      color: var(--text);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 5px;
+      line-height: 1.5;
+    }
+    .cert-items li::before {
+      content: '–';
+      color: var(--muted);
+      font-size: 0.8rem;
       flex-shrink: 0;
     }
-    .cert-name {
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 2px;
+    .cert-items a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
     }
-    .cert-issuer {
-      font-size: 0.8rem;
+    .cert-items a:hover {
+      color: var(--maroon);
+      border-color: var(--maroon);
+    }
+    .cert-meta {
       color: var(--muted);
+      font-size: 0.78rem;
+    }
+    @media (max-width: 660px) {
+      .cert-cols { grid-template-columns: 1fr; gap: 32px; }
     }
 
     /* ── FOOTER ── */
@@ -386,7 +415,11 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       .about-card { padding: 24px 22px; }
-      .job { padding: 22px 20px; }
+      .timeline::before { left: 0; }
+      .tl-item { grid-template-columns: 1fr; padding-left: 24px; }
+      .tl-item::before { left: -4px; top: 4px; }
+      .tl-item:first-child::before { top: 4px; }
+      .tl-year { text-align: left; padding-right: 0; margin-bottom: 6px; color: var(--maroon); }
     }
 
     /* ── HAMBURGER ── */
@@ -519,22 +552,34 @@
       <h2>Professional Experience</h2>
       <div class="timeline">
 
-        <div class="job">
-          <div class="job-title">Head of Learning Support &amp; LPYP Learning Support Teacher</div>
-          <div class="job-org">International School of Nanshan Shenzhen (ISNS)</div>
-          <div class="job-meta">Sep 2021 – Present · Shenzhen, Guangdong, China</div>
+        <div class="tl-item">
+          <div class="tl-year">2021 –<br>Present</div>
+          <div class="tl-content">
+            <div class="tl-org">International School of Nanshan Shenzhen</div>
+            <div class="tl-roles">
+              <div class="tl-role">Head of Learning Support &amp; LPYP Learning Support Teacher</div>
+            </div>
+          </div>
         </div>
 
-        <div class="job">
-          <div class="job-title">E-commerce Trainer</div>
-          <div class="job-org">Bukalapak</div>
-          <div class="job-meta">Jan 2015 – Jan 2019 · Greater Jakarta Area, Indonesia</div>
+        <div class="tl-item">
+          <div class="tl-year">2015 –<br>2019</div>
+          <div class="tl-content">
+            <div class="tl-org">Bukalapak</div>
+            <div class="tl-roles">
+              <div class="tl-role">E-commerce Trainer</div>
+            </div>
+          </div>
         </div>
 
-        <div class="job">
-          <div class="job-title">IFRS Consultant</div>
-          <div class="job-org">Deloitte</div>
-          <div class="job-meta">Jan 2011 – Jun 2014 · Greater Jakarta Area, Indonesia</div>
+        <div class="tl-item">
+          <div class="tl-year">2011 –<br>2014</div>
+          <div class="tl-content">
+            <div class="tl-org">Deloitte</div>
+            <div class="tl-roles">
+              <div class="tl-role">IFRS Consultant</div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -549,25 +594,34 @@
       <div class="edu-grid">
 
         <div class="edu-card">
-          <div class="edu-degree">Doctor of Education (EdD)</div>
+          <div class="edu-ghost">EdD</div>
+          <span class="edu-badge">Ed.D.</span>
+          <div class="edu-degree">Doctor of Education</div>
           <div class="edu-school">University College Fairview</div>
           <div class="edu-year">Apr 2026 – Apr 2029 · In Progress</div>
         </div>
 
         <div class="edu-card">
-          <div class="edu-degree">International Post Graduate Certificate in Education (iPGCE)</div>
+          <div class="edu-ghost">PG</div>
+          <span class="edu-badge">iPGCE</span>
+          <div class="edu-degree">International Post Graduate Certificate in Education</div>
           <div class="edu-school">University of Derby</div>
+          <div class="edu-year">Jan 2023</div>
         </div>
 
         <div class="edu-card">
-          <div class="edu-degree">MSc, International Trade, Strategies &amp; Operations</div>
+          <div class="edu-ghost">MSc</div>
+          <span class="edu-badge">M.Sc.</span>
+          <div class="edu-degree">International Trade, Strategies &amp; Operations</div>
           <div class="edu-school">University of Warwick</div>
           <div class="edu-year">2016 – 2017</div>
           <span class="edu-grade">Grade: Distinction</span>
         </div>
 
         <div class="edu-card">
-          <div class="edu-degree">Bachelor's Degree, Accounting and Finance</div>
+          <div class="edu-ghost">BA</div>
+          <span class="edu-badge">B.A.</span>
+          <div class="edu-degree">Accounting and Finance</div>
           <div class="edu-school">University of Bradford</div>
           <div class="edu-year">2009 – 2011</div>
         </div>
@@ -605,90 +659,86 @@
     <div class="section-inner">
       <div class="section-label" style="color: var(--maroon);">Continuing Education</div>
       <h2>Certifications &amp; Professional Development</h2>
-      <div class="cert-list">
-        <div class="cert-item">
-          <div class="cert-dot"></div>
+      <div class="cert-cols">
+
+        <!-- LEFT: IB + Neurodiversity + SEL -->
+        <div class="cert-col">
+
           <div>
-            <div class="cert-name">AI in the Classroom</div>
-            <div class="cert-issuer">Canva · Apr 2026</div>
+            <div class="cert-cat-head">IB &amp; International Education</div>
+            <ul class="cert-items">
+              <li><a href="documents/pd-ibed-building-student-competencies-cat3-2526.pdf" target="_blank" rel="noopener">IBED Building Student Competencies — Cat 3</a> <span class="cert-meta">· Oct 2025</span></li>
+              <li><a href="documents/pd-pyp-multilingual-learners-thrive-2425.pdf" target="_blank" rel="noopener">PYP Multilingual Learners Thrive</a> <span class="cert-meta">· Nov 2024</span></li>
+              <li><a href="documents/pd-pyp-engaging-collaborative-communities-cat2-2324.pdf" target="_blank" rel="noopener">PYP Engaging Collaborative Communities — Cat 2</a> <span class="cert-meta">· Nov 2023</span></li>
+              <li><a href="documents/pd-ipgce-university-of-derby-2223.pdf" target="_blank" rel="noopener">International Post Graduate Certificate in Education (iPGCE)</a> <span class="cert-meta">· University of Derby, Jan 2023</span></li>
+              <li><a href="documents/pd-ibed-agency-action-service-cat3-2223.pdf" target="_blank" rel="noopener">IBED Agency, Action &amp; Service — Cat 3</a> <span class="cert-meta">· Nov 2022</span></li>
+            </ul>
           </div>
+
+          <div>
+            <div class="cert-cat-head">Neurodiversity &amp; Inclusion</div>
+            <ul class="cert-items">
+              <li><a href="documents/pd-leading-inclusive-communities-neurodivergent-2526.pdf" target="_blank" rel="noopener">Leading Inclusive Communities — Neurodivergent</a> <span class="cert-meta">· Jan 2026</span></li>
+              <li><a href="documents/pd-introduction-to-executive-function-2526.pdf" target="_blank" rel="noopener">Introduction to Executive Function</a> <span class="cert-meta">· Untapped Learning, Dec 2025</span></li>
+              <li><a href="documents/pd-the-neuroscience-behind-learning-to-read-and-reading-to-learn-2526.pdf" target="_blank" rel="noopener">The Neuroscience Behind Learning to Read</a> <span class="cert-meta">· Sep 2025</span></li>
+              <li><a href="documents/pd-triple-a-in-the-classroom-2526.pdf" target="_blank" rel="noopener">Triple-A in the Classroom</a> <span class="cert-meta">· Aug 2025</span></li>
+              <li><a href="documents/pd-understanding-dyslexia-levels-2425.pdf" target="_blank" rel="noopener">Understanding Dyslexia — Levels 1, 2 &amp; 3</a> <span class="cert-meta">· May 2025</span></li>
+              <li>ADHD: Everyday Strategies for Elementary Students <span class="cert-meta">· University at Buffalo, Jul 2024</span></li>
+              <li><a href="documents/pd-diversity-and-inclusion-in-education-2324.pdf" target="_blank" rel="noopener">Diversity and Inclusion in Education</a> <span class="cert-meta">· Coursera / University of Glasgow, Jun 2024</span></li>
+              <li><a href="documents/pd-science-of-reading-2324.pdf" target="_blank" rel="noopener">Science of Reading</a> <span class="cert-meta">· Nov 2023</span></li>
+              <li><a href="documents/pd-inclusive-teaching-strategies-2223.pdf" target="_blank" rel="noopener">Inclusive Teaching Strategies</a> <span class="cert-meta">· Autism for Teachers</span></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="cert-cat-head">SEL &amp; Student Wellbeing</div>
+            <ul class="cert-items">
+              <li><a href="documents/pd-sel-for-students-2425.pdf" target="_blank" rel="noopener">SEL for Students: A Path to Social Emotional Well-Being</a> <span class="cert-meta">· Oct 2024</span></li>
+              <li><a href="documents/pd-motivating-gen-z-learners-2425.pdf" target="_blank" rel="noopener">Motivating Gen Z Learners</a> <span class="cert-meta">· Aug 2024</span></li>
+            </ul>
+          </div>
+
         </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
+
+        <!-- RIGHT: SENIA + Tech + Other -->
+        <div class="cert-col">
+
           <div>
-            <div class="cert-name">Leading Inclusive Communities – Neurodivergent</div>
-            <div class="cert-issuer">PD Academia · 2026</div>
+            <div class="cert-cat-head">SENIA</div>
+            <ul class="cert-items">
+              <li><a href="documents/pd-senia-unplugged-certificate-of-speaker-2526.pdf" target="_blank" rel="noopener">SENIA Unplugged — Speaker</a> <span class="cert-meta">· Nov 2025</span></li>
+              <li><a href="documents/pd-senia-unplugged-certificate-of-attendance-2526.pdf" target="_blank" rel="noopener">SENIA Unplugged — Attendee</a> <span class="cert-meta">· Nov 2025</span></li>
+              <li><a href="documents/pd-senia-facilitating-collaborative-case-management-level-2-2425.pdf" target="_blank" rel="noopener">Facilitating Collaborative Case Management — Level 2</a> <span class="cert-meta">· May 2025</span></li>
+              <li><a href="documents/pd-senia-belonging-and-beyond-certificate-of-speaker-2425.pdf" target="_blank" rel="noopener">Belonging &amp; Beyond Conference — Speaker</a> <span class="cert-meta">· Mar 2025</span></li>
+              <li><a href="documents/pd-senia-belonging-and-beyond-certificate-of-attendance-2425.pdf" target="_blank" rel="noopener">Belonging &amp; Beyond Conference — Attendee</a> <span class="cert-meta">· Mar 2025</span></li>
+              <li><a href="documents/pd-communication-senia-level-2-2425.pdf" target="_blank" rel="noopener">Communication — Level 2</a> <span class="cert-meta">· Apr 2025</span></li>
+              <li><a href="documents/pd-universal-design-for-learning-senia-level-2-2425.pdf" target="_blank" rel="noopener">Universal Design for Learning — Level 2</a> <span class="cert-meta">· Mar 2025</span></li>
+              <li><a href="documents/pd-exploring-executive-functions-senia-level-2-2425.pdf" target="_blank" rel="noopener">Exploring Executive Functions — Level 2</a> <span class="cert-meta">· Feb 2025</span></li>
+              <li><a href="documents/pd-senia-level-1-certified-educator-2324.pdf" target="_blank" rel="noopener">SENIA Certified Educator — Level 1</a> <span class="cert-meta">· Nov 2023</span></li>
+              <li><a href="documents/pd-senia-developing-ilp-level-1-2324.pdf" target="_blank" rel="noopener">Developing Individual Learning Profiles — Level 1</a> <span class="cert-meta">· Nov 2023</span></li>
+              <li><a href="documents/pd-senia-supporting-the-whole-child-level-1-2324.pdf" target="_blank" rel="noopener">Supporting the Whole Child — Level 1</a> <span class="cert-meta">· Oct 2023</span></li>
+              <li><a href="documents/pd-senia-universal-supports-level-1-2223.pdf" target="_blank" rel="noopener">Universal Supports — Level 1</a> <span class="cert-meta">· Jun 2023</span></li>
+              <li><a href="documents/pd-senia-understanding-behavior-level-1-2223.pdf" target="_blank" rel="noopener">Understanding Behavior — Level 1</a> <span class="cert-meta">· May 2023</span></li>
+              <li><a href="documents/pd-senia-implementing-inclusion-systems-level-1-2223.pdf" target="_blank" rel="noopener">Implementing Inclusion Systems — Level 1</a> <span class="cert-meta">· Apr 2023</span></li>
+            </ul>
           </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
+
           <div>
-            <div class="cert-name">AI Literacy Skills Certificate</div>
-            <div class="cert-issuer">Toddle – Your Teaching Partner · Aug 2025</div>
+            <div class="cert-cat-head">Technology &amp; AI</div>
+            <ul class="cert-items">
+              <li><a href="documents/pd-ai-literacy-skills-101-2526.pdf" target="_blank" rel="noopener">AI Literacy Skills 101</a> <span class="cert-meta">· Toddle, Sep 2025</span></li>
+              <li>AI in the Classroom <span class="cert-meta">· Canva, Apr 2026</span></li>
+            </ul>
           </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
+
           <div>
-            <div class="cert-name">SEL for Students: A Path to Social Emotional Well-Being</div>
-            <div class="cert-issuer">University of Colorado Boulder · Oct 2024</div>
+            <div class="cert-cat-head">Other Qualifications</div>
+            <ul class="cert-items">
+              <li>Teaching English as a Foreign Language (TEFL) <span class="cert-meta">· The TEFL Org, Dec 2021</span></li>
+              <li>Pendidikan dan Pelatihan Ekspor Indonesia (PPEI) <span class="cert-meta">· Export Training &amp; Education</span></li>
+            </ul>
           </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">Motivating Gen Z Learners: What Parents and Teachers Need to Know</div>
-            <div class="cert-issuer">Nanyang Technological University Singapore · Aug 2024</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">ADHD: Everyday Strategies for Elementary Students</div>
-            <div class="cert-issuer">University at Buffalo · Jul 2024</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">Diversity and Inclusion in Education</div>
-            <div class="cert-issuer">University of Glasgow · Jun 2024</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">International Post Graduate Certificate of Education (iPGCE)</div>
-            <div class="cert-issuer">University of Derby · Dec 2023</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">SENIA Certified Level 1</div>
-            <div class="cert-issuer">SENIA International · Mar 2023</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">Teaching English as a Foreign Language (TEFL)</div>
-            <div class="cert-issuer">The TEFL Org · Dec 2021</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">PPEI – Pendidikan dan Pelatihan Ekspor Indonesia</div>
-            <div class="cert-issuer">Export Training &amp; Education</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div>
-            <div class="cert-name">Executive Function Skills – Untapped Learning</div>
-            <div class="cert-issuer">Professional Development · 2025–2026</div>
-          </div>
+
         </div>
       </div>
     </div>
