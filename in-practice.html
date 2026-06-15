@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Support in Practice – Putri Wanna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --maroon-dark:  #310004;
+      --maroon:       #59090F;
+      --maroon-mid:   #4B090E;
+      --maroon-pale:  #F9F0F1;
+      --bg:           #FDFAF9;
+      --card:         #FFFFFF;
+      --text:         #1C0A0B;
+      --muted:        #6B4B4E;
+      --border:       #EAD9DA;
+      --radius:       14px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--maroon-dark);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #fff; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: var(--maroon-dark);
+      color: #fff;
+      padding: 60px 5% 50px;
+    }
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .breadcrumb:hover { color: #fff; }
+    .page-header-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .page-header p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.95rem;
+      max-width: 620px;
+    }
+
+    /* ── SECTION NAV ── */
+    .section-nav {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      position: sticky;
+      top: 60px;
+      z-index: 50;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .section-nav::-webkit-scrollbar { display: none; }
+    .section-nav-link {
+      display: block;
+      padding: 14px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .section-nav-link:hover {
+      color: var(--maroon);
+      border-bottom-color: var(--maroon);
+    }
+
+    /* ── PRACTICE SECTIONS ── */
+    .practice-section {
+      padding: 64px 5%;
+    }
+    .practice-section:nth-child(odd)  { background: var(--bg); }
+    .practice-section:nth-child(even) { background: var(--maroon-pale); }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--maroon);
+      margin-bottom: 8px;
+    }
+    .section-inner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .section-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    /* ── PHOTO GRID ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .photo-grid { grid-template-columns: 1fr; } }
+
+    .photo-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .photo-media {
+      aspect-ratio: 4 / 3;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--maroon-pale);
+    }
+    .photo-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      color: var(--muted);
+    }
+    .photo-placeholder span:first-child { font-size: 1.8rem; opacity: 0.45; }
+    .photo-placeholder span:last-child  { font-size: 0.78rem; font-weight: 500; }
+    .photo-caption {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .photo-caption strong {
+      display: block;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.875rem;
+      margin-bottom: 2px;
+    }
+
+    /* ── PORTFOLIO NAV ── */
+    .portfolio-nav-section {
+      background: var(--maroon-pale);
+      padding: 48px 5%;
+      text-align: center;
+    }
+    .portfolio-nav-section h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .portfolio-nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    .portfolio-nav-link {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 22px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .portfolio-nav-link:hover {
+      box-shadow: 0 4px 16px rgba(49,0,4,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--maroon-dark);
+      z-index: 99;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; padding: 8px 0 16px; }
+    .mobile-menu a {
+      display: block;
+      padding: 14px 5%;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-menu a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--maroon-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 40px 5%;
+      font-size: 0.875rem;
+    }
+    footer strong { color: #fff; }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-name">Putri Wanna</a>
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#education">Education</a></li>
+      <li><a href="index.html#expertise">Expertise</a></li>
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#education">Education</a></li>
+      <li><a href="index.html#expertise">Expertise</a></li>
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+    </ul>
+  </div>
+
+  <div class="page-header">
+    <a href="index.html#portfolio" class="breadcrumb">← Back to Portfolio</a>
+    <div class="page-header-label">Professional Portfolio</div>
+    <h1>Learning Support in Practice</h1>
+    <p>A window into daily learning support work — student interventions, skill-building activities, and evidence of growth across academic years.</p>
+  </div>
+
+  <nav class="section-nav" aria-label="Page sections">
+    <a href="#students"           class="section-nav-link">Working with Students</a>
+    <a href="#literacy"           class="section-nav-link">Literacy Support</a>
+    <a href="#executive-function" class="section-nav-link">Executive Functioning</a>
+    <a href="#math"               class="section-nav-link">Math Group</a>
+    <a href="#atl"                class="section-nav-link">ATL Skills</a>
+    <a href="#tech"               class="section-nav-link">Technology Integration</a>
+    <a href="#after-school"       class="section-nav-link">After School</a>
+  </nav>
+
+  <!-- 1. Working with Students -->
+  <section class="practice-section" id="students">
+    <div class="section-inner">
+      <div class="section-label">Interventions &amp; Activities</div>
+      <h2>Working with Students</h2>
+      <p class="section-desc">Small group and 1:1 learning support sessions tailored to individual student needs — building skills in reading, executive functioning, language, and self-regulation.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <img src="images/students-math-group.jpg" alt="Math Group Intervention" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><span>📷</span><span>Photo coming soon</span></div>'">
+          </div>
+          <p class="photo-caption"><strong>Math Group Intervention</strong>Working on number accuracy and fluency in a small group setting.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Executive Functioning Skills – Jenga</strong>Using Jenga to develop planning, impulse control, and turn-taking skills.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Small Group Work – I Spy &amp; Sentence Creation</strong>Building vocabulary and sentence structure through guided play.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Arranging Words to Structure Sentences</strong>Hands-on activity to reinforce syntax and reading comprehension.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Working on Executive Functioning Skills</strong>Targeted strategies to support planning, organisation, and task initiation.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>1:1 Learning Support Session</strong>Individualised intervention aligned to student ILP/SSP goals.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Literacy Support & Students' Work -->
+  <section class="practice-section" id="literacy">
+    <div class="section-inner">
+      <div class="section-label">Reading &amp; Writing</div>
+      <h2>Literacy Support &amp; Students' Work</h2>
+      <p class="section-desc">Samples of student work showing progress in phonics, reading fluency, comprehension, and written expression across grade levels.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Segmenting 3–4 Letter Words</strong>Student worksheet showing phonics segmentation practice · Sep 2024</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>G2 Text-to-Text Connection</strong>Student graphic organiser making connections between two texts.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Reading Fluency Practice</strong>Student reading aloud during a guided reading intervention session.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Comprehension Work Sample</strong>Evidence of reading comprehension strategy application.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Executive Functioning Skills -->
+  <section class="practice-section" id="executive-function">
+    <div class="section-inner">
+      <div class="section-label">Self-Regulation &amp; Organisation</div>
+      <h2>Executive Functioning Skills</h2>
+      <p class="section-desc">Structured activities and strategies that build planning, working memory, flexible thinking, and emotional regulation in learners who need additional support.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Task Initiation Activity</strong>Supporting students to start tasks independently using structured prompts.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Organisation Strategy Practice</strong>Using visual tools and checklists to build organisational habits.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Working Memory Game</strong>Game-based intervention to strengthen working memory capacity.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Math Group Intervention -->
+  <section class="practice-section" id="math">
+    <div class="section-inner">
+      <div class="section-label">Numeracy</div>
+      <h2>Math Group Intervention</h2>
+      <p class="section-desc">Targeted small-group numeracy support helping students build accuracy, fluency, and confidence with mathematical concepts.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Number Fluency Session</strong>Small group working on number accuracy and automaticity.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Hands-On Math Activity</strong>Using manipulatives to build conceptual understanding.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Student Work Sample – Math</strong>Evidence of progress in numerical operations and problem solving.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ATL Skills Evidence -->
+  <section class="practice-section" id="atl">
+    <div class="section-inner">
+      <div class="section-label">Approaches to Learning</div>
+      <h2>ATL Skills Evidence</h2>
+      <p class="section-desc">Explicit teaching and documentation of IB Approaches to Learning skills — thinking, communication, self-management, research, and social skills — woven into every intervention.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Self-Management Skills</strong>Students applying self-management strategies during an intervention session.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Thinking Skills in Action</strong>Metacognitive reflection activity — students identifying their ATL strategies.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Communication Skills</strong>Students practising verbal and written communication in a structured task.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Technology Integration -->
+  <section class="practice-section" id="tech">
+    <div class="section-inner">
+      <div class="section-label">EdTech in Learning Support</div>
+      <h2>Technology Integration</h2>
+      <p class="section-desc">Purposeful use of technology tools — including AI, UFLI, RAZ Kids, and Reading Coach — to personalise learning and extend access for students with additional needs.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>UFLI Virtual Blending Board</strong>Using the UF Literacy Institute's digital blending board for phonics intervention.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Reading Coach (Microsoft)</strong>AI-powered reading fluency practice with personalised feedback.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Student Using Learning App</strong>Supported digital learning during an intervention session.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. After School Activity -->
+  <section class="practice-section" id="after-school">
+    <div class="section-inner">
+      <div class="section-label">Beyond the Classroom</div>
+      <h2>After School Activity</h2>
+      <p class="section-desc">Extending learning support beyond regular school hours — fostering engagement, confidence, and a love of learning in a relaxed, low-pressure setting.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>After School Session</strong>Students engaging in supported learning activities after school.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Activity &amp; Play</strong>Building skills through structured play and creative tasks.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Student Engagement</strong>Encouraging self-directed learning and curiosity outside the classroom.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="portfolio-nav-section">
+    <h2>More in Portfolio</h2>
+    <div class="portfolio-nav-links">
+      <a href="collaboration.html"            class="portfolio-nav-link">🤝 Collaboration &amp; Community</a>
+      <a href="goals.html"                    class="portfolio-nav-link">📋 Learning Support Goals</a>
+      <a href="observations.html"             class="portfolio-nav-link">📝 Professional Observation Notes</a>
+      <a href="professional-development.html" class="portfolio-nav-link">🎓 Professional Development</a>
+      <a href="ib-capabilities.html"          class="portfolio-nav-link">🌍 IB Educator Capabilities</a>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Putri Wanna</strong> · Head of Learning Support</p>
+    <p style="margin-top:6px;">International School of Nanshan Shenzhen · Shenzhen, China</p>
+    <p style="margin-top:12px;">
+      <a href="https://www.linkedin.com/in/putri-wanna/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+    <p style="margin-top:20px; font-size:0.75rem; opacity:0.5;">© 2026 Putri Wanna</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>

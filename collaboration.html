@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collaboration &amp; Community – Putri Wanna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --maroon-dark:  #310004;
+      --maroon:       #59090F;
+      --maroon-mid:   #4B090E;
+      --maroon-pale:  #F9F0F1;
+      --bg:           #FDFAF9;
+      --card:         #FFFFFF;
+      --text:         #1C0A0B;
+      --muted:        #6B4B4E;
+      --border:       #EAD9DA;
+      --radius:       14px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--maroon-dark);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #fff; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: var(--maroon-dark);
+      color: #fff;
+      padding: 60px 5% 50px;
+    }
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .breadcrumb:hover { color: #fff; }
+    .page-header-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .page-header p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.95rem;
+      max-width: 620px;
+    }
+
+    /* ── SECTION NAV ── */
+    .section-nav {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      position: sticky;
+      top: 60px;
+      z-index: 50;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .section-nav::-webkit-scrollbar { display: none; }
+    .section-nav-link {
+      display: block;
+      padding: 14px 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .section-nav-link:hover {
+      color: var(--maroon);
+      border-bottom-color: var(--maroon);
+    }
+
+    /* ── PRACTICE SECTIONS ── */
+    .practice-section { padding: 64px 5%; }
+    .practice-section:nth-child(odd)  { background: var(--bg); }
+    .practice-section:nth-child(even) { background: var(--maroon-pale); }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--maroon);
+      margin-bottom: 8px;
+    }
+    .section-inner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .section-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    /* ── PHOTO GRID ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .photo-grid { grid-template-columns: 1fr; } }
+
+    /* Wide layout: 2-col grid for landscape-heavy sections */
+    .photo-grid.wide {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 640px) { .photo-grid.wide { grid-template-columns: 1fr; } }
+
+    .photo-card { display: flex; flex-direction: column; gap: 10px; }
+    .photo-media {
+      aspect-ratio: 4 / 3;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--maroon-pale);
+    }
+    .photo-media.landscape { aspect-ratio: 16 / 9; }
+    .photo-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      color: var(--muted);
+    }
+    .photo-placeholder span:first-child { font-size: 1.8rem; opacity: 0.45; }
+    .photo-placeholder span:last-child  { font-size: 0.78rem; font-weight: 500; }
+    .photo-caption {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .photo-caption strong {
+      display: block;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.875rem;
+      margin-bottom: 2px;
+    }
+
+    /* ── PORTFOLIO NAV ── */
+    .portfolio-nav-section {
+      background: var(--maroon-pale);
+      padding: 48px 5%;
+      text-align: center;
+    }
+    .portfolio-nav-section h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .portfolio-nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .portfolio-nav-link {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 22px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .portfolio-nav-link:hover {
+      box-shadow: 0 4px 16px rgba(49,0,4,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--maroon-dark);
+      z-index: 99;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; padding: 8px 0 16px; }
+    .mobile-menu a {
+      display: block;
+      padding: 14px 5%;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-menu a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--maroon-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 40px 5%;
+      font-size: 0.875rem;
+    }
+    footer strong { color: #fff; }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-name">Putri Wanna</a>
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#education">Education</a></li>
+      <li><a href="index.html#expertise">Expertise</a></li>
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#education">Education</a></li>
+      <li><a href="index.html#expertise">Expertise</a></li>
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+    </ul>
+  </div>
+
+  <div class="page-header">
+    <a href="index.html#portfolio" class="breadcrumb">← Back to Portfolio</a>
+    <div class="page-header-label">Professional Portfolio</div>
+    <h1>Collaboration &amp; Community</h1>
+    <p>Building partnerships beyond the classroom — working alongside teachers, families, and the wider school community to champion inclusive education.</p>
+  </div>
+
+  <nav class="section-nav" aria-label="Page sections">
+    <a href="#workshops" class="section-nav-link">Parent &amp; Teacher Workshops</a>
+    <a href="#events"    class="section-nav-link">School Events</a>
+    <a href="#ls-team"   class="section-nav-link">LS &amp; S3T Collaboration</a>
+    <a href="#teachers"  class="section-nav-link">Working with Teachers</a>
+  </nav>
+
+  <!-- 1. Parent & Teacher Workshops -->
+  <section class="practice-section" id="workshops">
+    <div class="section-inner">
+      <div class="section-label">Professional Development &amp; Outreach</div>
+      <h2>Parent &amp; Teacher Workshops</h2>
+      <p class="section-desc">Designing and facilitating workshops that build capacity — empowering parents to support learning at home and equipping teachers with inclusive strategies for the classroom.</p>
+      <div class="photo-grid wide">
+
+        <div class="photo-card">
+          <div class="photo-media landscape">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Empowering Engagement – Leveraging AI to Personalise Learning</strong>Teacher workshop on using AI tools to differentiate and personalise learning for every student · 2025–2026</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media landscape">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>EdTech Guangzhou 25-26</strong>Presenting at the EdTech Guangzhou conference on learning support and technology integration · 2025–2026</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media landscape">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>LPYP Parent Workshop – Learning Engagement</strong>Facilitating a parent workshop on supporting learning engagement at home · Semester 1, 2025–2026</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media landscape">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>LPYP Parent Workshop – Declarative Language</strong>Workshop on using declarative language to support students with social-communication needs · Semester 2, 2025–2026</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Participating in School Events -->
+  <section class="practice-section" id="events">
+    <div class="section-inner">
+      <div class="section-label">School Community</div>
+      <h2>Participating in School Events</h2>
+      <p class="section-desc">An active presence across the school community — from awareness campaigns to whole-school celebrations — promoting inclusion, belonging, and student wellbeing.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Diversity Day 2025–2026</strong>"Diversity is the Fruit, Equity is the Root" – celebrating the school's diverse community · 2025–2026</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Bullying Awareness Week 2024–2025</strong>Raising awareness about kindness, belonging, and anti-bullying across the school community · 2024–2025</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Whole-School Event</strong>Participating in school-wide initiatives that promote inclusion and student wellbeing.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LS & S3T Wednesday Collaboration -->
+  <section class="practice-section" id="ls-team">
+    <div class="section-inner">
+      <div class="section-label">Team &amp; Professional Learning</div>
+      <h2>LS &amp; S3T Wednesday Collaboration</h2>
+      <p class="section-desc">Regular structured collaboration with the Learning Support team and Student Support &amp; Services Team — sharing practice, reviewing student data, and building a cohesive support system.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>LS Team 2025–2026</strong>The Learning Support team at ISNS · 2025–2026</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>First Circle with S3T Members</strong>Starting our first structured 'circle' session with the Student Support &amp; Services Team · 2025–2026</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Wednesday LS Collaboration</strong>Weekly team meeting to align on student needs, ILP/SSP reviews, and shared strategies.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Working with Teachers -->
+  <section class="practice-section" id="teachers">
+    <div class="section-inner">
+      <div class="section-label">Classroom Partnership</div>
+      <h2>Working with Teachers</h2>
+      <p class="section-desc">Co-planning, co-teaching, and consulting with classroom teachers to design inclusive learning environments and ensure every student's needs are met within the mainstream setting.</p>
+      <div class="photo-grid">
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Co-Planning Session</strong>Collaborating with classroom teachers to align interventions with unit-of-inquiry goals.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>ILP/SSP Review Meeting</strong>Reviewing student Individual Learning Plans with the classroom teacher and relevant specialists.</p>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-media">
+            <div class="photo-placeholder"><span>📷</span><span>Photo coming soon</span></div>
+          </div>
+          <p class="photo-caption"><strong>Providing LS Data to Teachers</strong>Sharing individualised student data to inform classroom differentiation and accommodation planning.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="portfolio-nav-section">
+    <h2>More in Portfolio</h2>
+    <div class="portfolio-nav-links">
+      <a href="in-practice.html"              class="portfolio-nav-link">🏫 Learning Support in Practice</a>
+      <a href="goals.html"                    class="portfolio-nav-link">📋 Learning Support Goals</a>
+      <a href="observations.html"             class="portfolio-nav-link">📝 Professional Observation Notes</a>
+      <a href="professional-development.html" class="portfolio-nav-link">🎓 Professional Development</a>
+      <a href="ib-capabilities.html"          class="portfolio-nav-link">🌍 IB Educator Capabilities</a>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Putri Wanna</strong> · Head of Learning Support</p>
+    <p style="margin-top:6px;">International School of Nanshan Shenzhen · Shenzhen, China</p>
+    <p style="margin-top:12px;">
+      <a href="https://www.linkedin.com/in/putri-wanna/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+    <p style="margin-top:20px; font-size:0.75rem; opacity:0.5;">© 2026 Putri Wanna</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>

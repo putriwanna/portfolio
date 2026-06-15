@@ -309,6 +309,97 @@
       transition: color 0.2s;
     }
     footer a:hover { color: #fff; }
+
+    /* ── REFLECTION ESSAYS ── */
+    .pd-intro {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 680px;
+      margin-bottom: 36px;
+      line-height: 1.75;
+    }
+    .reflection-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--maroon);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      margin-bottom: 24px;
+    }
+    .reflection-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .reflection-block .reflection-meta {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--maroon);
+      margin-bottom: 20px;
+    }
+    .reflection-block p {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .reflection-block p:last-child { margin-bottom: 0; }
+    .reflection-block h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--maroon);
+      margin: 20px 0 8px;
+    }
+    .reflection-placeholder {
+      background: var(--maroon-pale);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 24px;
+    }
+    .reflection-placeholder strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    /* ── ISTE TOOL LINKS ── */
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 22px;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .tool-card:hover {
+      box-shadow: 0 4px 20px rgba(49,0,4,0.1);
+      transform: translateY(-2px);
+    }
+    .tool-card-icon { font-size: 1.4rem; margin-bottom: 12px; }
+    .tool-card-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; line-height: 1.4; }
+    .tool-card-url { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; }
+    .tool-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    .tool-card-link {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--maroon);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
   </style>
 </head>
 <body>
@@ -349,6 +440,8 @@
     <button class="tab-btn" onclick="showYear('y2425', this)">2024–2025</button>
     <button class="tab-btn" onclick="showYear('y2324', this)">2023–2024</button>
     <button class="tab-btn" onclick="showYear('y2223', this)">2022–2023</button>
+    <button class="tab-btn" onclick="showYear('iste', this)">ISTE Standards</button>
+    <button class="tab-btn" onclick="showYear('reflections', this)">PD Reflections</button>
   </div>
 
   <div class="content">
@@ -609,14 +702,110 @@
       </div>
     </div>
 
+    <!-- ISTE Standards -->
+    <div id="iste" class="year-panel">
+      <div class="section-title">Technology Standards for Educators – ISTE</div>
+      <p class="pd-intro">Applying the ISTE Standards for Educators framework to integrate technology meaningfully into learning support practice — empowering students through purposeful, accessible digital tools.</p>
+
+      <div class="capability-group">
+        <div class="capability-heading">Tools in Use</div>
+        <div class="artifact-grid">
+
+          <a href="https://ufli.education.ufl.edu" class="tool-card" target="_blank" rel="noopener">
+            <div class="tool-card-icon">🔤</div>
+            <div class="tool-card-title">UFLI Virtual Blending Board</div>
+            <div class="tool-card-url">ufli.education.ufl.edu</div>
+            <div class="tool-card-desc">UF Literacy Institute's digital blending board for explicit phonics instruction and reading intervention.</div>
+            <span class="tool-card-link">Open tool ↗</span>
+          </a>
+
+          <a href="https://coach.microsoft.com" class="tool-card" target="_blank" rel="noopener">
+            <div class="tool-card-icon">🎙️</div>
+            <div class="tool-card-title">Reading Coach (Microsoft)</div>
+            <div class="tool-card-url">coach.microsoft.com</div>
+            <div class="tool-card-desc">AI-powered reading fluency tool providing personalised practice and real-time feedback for students.</div>
+            <span class="tool-card-link">Open tool ↗</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="capability-group">
+        <div class="capability-heading">ISTE Rubric &amp; Evidence</div>
+        <div class="artifact-grid">
+
+          <div class="artifact-card placeholder">
+            <div class="artifact-card-icon">📊</div>
+            <div class="artifact-card-title">ISTE Rubric 2025–2026</div>
+            <div class="artifact-card-meta">ISTE Standards for Educators · 2025–2026</div>
+          </div>
+
+          <div class="artifact-card placeholder">
+            <div class="artifact-card-icon">📋</div>
+            <div class="artifact-card-title">Application of the ISTE Rubric 2025–2026</div>
+            <div class="artifact-card-meta">Evidence of ISTE standards application · 2025–2026</div>
+          </div>
+
+          <div class="artifact-card placeholder">
+            <div class="artifact-card-icon">📊</div>
+            <div class="artifact-card-title">ISTE Rubric 2024–2025</div>
+            <div class="artifact-card-meta">ISTE Standards for Educators · 2024–2025</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PD Reflections -->
+    <div id="reflections" class="year-panel">
+      <div class="section-title">Professional Development Reflections</div>
+      <p class="pd-intro">Written reflections on professional learning — connecting new knowledge to classroom practice and the ongoing journey of becoming a more effective, inclusive educator.</p>
+
+      <div class="reflection-block">
+        <h3>PD Reflection 2025–2026</h3>
+        <div class="reflection-meta">Learning Support · LPYP · 2025–2026</div>
+        <p>As a learning support teacher in the lower PYP, teaching global competence provides me with a meaningful framework to guide students who need additional help in developing both academic and life skills. Supporting students' social and emotional growth is crucial, as many lower PYP learners require guidance to build confidence, manage emotions, and develop empathy for others.</p>
+        <p>By integrating activities that foster understanding of diverse perspectives and cultures, I can help my students connect learning to real-world experiences and see themselves as part of a global community. This allows them to build not only academic competencies but also compassion, resilience, and a sense of belonging — qualities that are foundational for learners who need additional support.</p>
+      </div>
+
+      <div class="reflection-placeholder">
+        <strong>IB Workshop 2025–2026 – Day 2: Student Competency</strong>
+        Written reflection coming soon.
+      </div>
+
+      <div class="reflection-placeholder">
+        <strong>IB Workshop 2025–2026 – Day 1: Student Competency</strong>
+        Written reflection coming soon.
+      </div>
+
+      <div class="reflection-block">
+        <h3>Reflection on PYP Multilingual Learners and Translanguaging</h3>
+        <div class="reflection-meta">PYP · Multilingual Learners · 2024–2025</div>
+
+        <h4>Connecting to Culture and Identity</h4>
+        <p>In the context of the Primary Years Programme (PYP), the approach to multilingual learners must go beyond mere translation. Translanguaging is a dynamic process that recognises and values the fluidity of language use among students — leveraging all the linguistic resources they bring to the classroom, including their home languages, to enhance their learning experiences.</p>
+        <p>Understanding that language is intertwined with culture and identity is essential. Each student comes to the classroom with a rich tapestry of experiences shaped by their cultural backgrounds. By acknowledging and integrating students' cultures into the learning environment, educators can create a more inclusive and affirming space. This not only validates students' identities but also enriches learning for all — incorporating stories, examples, and practices from students' cultures makes lessons more relevant and engaging, fostering a sense of belonging and ownership.</p>
+
+        <h4>Embracing Local Languages</h4>
+        <p>Allowing students to use their home languages during lessons is crucial. When students feel free to express themselves in their preferred language, they can engage more deeply with content, participate in discussions, and articulate their thoughts without the barriers a single language might impose. This supports cognitive development and helps them build a stronger foundation in both their home language and the language of instruction. Using multiple languages is not a sign of deficiency — it is a strength that enhances understanding and facilitates learning.</p>
+
+        <h4>Providing Choices for Engagement</h4>
+        <p>Choice plays a pivotal role in promoting student engagement and agency. When students are given options in how they demonstrate their learning — or which materials they use — they are more likely to take ownership of their educational journey. This autonomy fosters self-efficacy, as students see the direct impact of their choices on their outcomes. Allowing students to choose project topics, select reading materials in their preferred language, or decide how to present their work empowers them and increases motivation to participate actively.</p>
+        <p>The PYP framework for multilingual learners must embrace translanguaging as a multifaceted tool that goes beyond translation. By connecting to students' cultures and identities, embracing their home languages, and providing choices in learning, educators can create an environment that supports engagement, agency, and growth — cultivating a richer, more diverse classroom where all students can thrive.</p>
+      </div>
+
+    </div>
+
   </div>
 
   <section class="portfolio-nav-section">
     <h2>More in Portfolio</h2>
     <div class="portfolio-nav-links">
-      <a href="goals.html" class="portfolio-nav-link">📋 Learning Support Goals</a>
-      <a href="observations.html" class="portfolio-nav-link">📝 Professional Observation Notes</a>
+      <a href="goals.html"           class="portfolio-nav-link">📋 Learning Support Goals</a>
+      <a href="observations.html"    class="portfolio-nav-link">📝 Professional Observation Notes</a>
       <a href="ib-capabilities.html" class="portfolio-nav-link">🌍 IB Educator Capabilities</a>
+      <a href="in-practice.html"     class="portfolio-nav-link">🏫 Learning Support in Practice</a>
+      <a href="collaboration.html"   class="portfolio-nav-link">🤝 Collaboration &amp; Community</a>
     </div>
   </section>
 
