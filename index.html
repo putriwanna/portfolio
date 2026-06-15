@@ -440,6 +440,16 @@
       nav ul { display: none; }
       .hamburger { display: flex; }
       .hero-bg { background-position: left center; }
+      .hero { align-items: stretch; }
+      .hero-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        padding-top: 80px;
+        padding-bottom: 48px;
+      }
+      .hero-bottom { margin-top: auto; }
     }
   </style>
 </head>
@@ -474,12 +484,16 @@
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-inner">
-      <div class="hero-tag">Learning Support Educator · Shenzhen, China</div>
-      <h1>Putri Wanna</h1>
-      <p class="hero-role">Head of Learning Support &amp; LPYP Learning Support Teacher<br>
-        International School of Nanshan Shenzhen</p>
-      <p class="hero-quote">"An investment in knowledge pays the best interest." — Benjamin Franklin</p>
-      <a href="#about" class="hero-btn">Explore My Portfolio</a>
+      <div class="hero-top">
+        <div class="hero-tag">Learning Support Educator · Shenzhen, China</div>
+        <h1>Putri Wanna</h1>
+        <p class="hero-role">Head of Learning Support &amp; LPYP Learning Support Teacher<br>
+          International School of Nanshan Shenzhen</p>
+      </div>
+      <div class="hero-bottom">
+        <p class="hero-quote">"An investment in knowledge pays the best interest." — Benjamin Franklin</p>
+        <a href="#about" class="hero-btn">Explore My Portfolio</a>
+      </div>
     </div>
   </section>
 
