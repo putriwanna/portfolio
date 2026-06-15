@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Putri Wanna – Learning Support Educator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --coral:   #FF6B6B;
+      --coral-light: #FFF0F0;
+      --teal:    #4ECDC4;
+      --teal-light: #E8FAF9;
+      --yellow:  #FFD93D;
+      --yellow-light: #FFFBEA;
+      --lavender: #A29BFE;
+      --bg:      #FFFBF5;
+      --card:    #FFFFFF;
+      --text:    #2D3436;
+      --muted:   #636E72;
+      --border:  #EEE9E2;
+      --radius:  14px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,251,245,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--coral);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--coral); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 40%, #4ECDC4 100%);
+      color: #fff;
+      padding: 100px 5% 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 30%;
+      width: 220px; height: 220px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .hero-inner {
+      max-width: 760px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 100px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      line-height: 1.18;
+      margin-bottom: 16px;
+    }
+    .hero-role {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+    .hero-quote {
+      font-style: italic;
+      opacity: 0.85;
+      font-size: 0.95rem;
+      border-left: 3px solid rgba(255,255,255,0.5);
+      padding-left: 14px;
+      max-width: 520px;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 72px 5%;
+    }
+    .section-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      margin-bottom: 32px;
+      line-height: 1.25;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--teal-light); }
+    .about-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      box-shadow: 0 2px 20px rgba(78,205,196,0.1);
+      border: 1px solid #C8F5F2;
+    }
+    .about-card p {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .about-card p:last-child { margin-bottom: 0; }
+    .motto {
+      display: inline-block;
+      margin-top: 20px;
+      background: linear-gradient(90deg, var(--coral), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+    .timeline { display: flex; flex-direction: column; gap: 24px; }
+    .job {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--coral);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .job:hover {
+      box-shadow: 0 6px 28px rgba(255,107,107,0.12);
+      transform: translateX(4px);
+    }
+    .job-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .job-org {
+      font-weight: 500;
+      color: var(--coral);
+      font-size: 0.95rem;
+    }
+    .job-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .job-desc {
+      margin-top: 12px;
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--yellow-light); }
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .edu-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      border: 1px solid #F0E5B0;
+      border-top: 4px solid var(--yellow);
+    }
+    .edu-degree {
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+    .edu-school {
+      color: #C9960C;
+      font-weight: 500;
+      font-size: 0.93rem;
+    }
+    .edu-year {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .edu-grade {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--yellow-light);
+      border: 1px solid #FFD93D;
+      border-radius: 100px;
+      padding: 2px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #9A7200;
+    }
+
+    /* ── EXPERTISE ── */
+    #expertise { background: var(--bg); }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .chip {
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.87rem;
+      font-weight: 500;
+      border: 1.5px solid transparent;
+    }
+    .chip-coral  { background: var(--coral-light); color: #C0392B; border-color: #FFCDD2; }
+    .chip-teal   { background: var(--teal-light);  color: #00796B; border-color: #B2DFDB; }
+    .chip-yellow { background: var(--yellow-light); color: #8A6500; border-color: #FFE082; }
+    .chip-purple { background: #F3F0FF; color: #5E35B1; border-color: #D1C4E9; }
+
+    /* ── CERTIFICATIONS ── */
+    #certifications { background: #F8F4FF; }
+    .cert-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .cert-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      border: 1px solid #DDD6FE;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .cert-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--lavender);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .cert-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+    .cert-issuer {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.65);
+      text-align: center;
+      padding: 40px 5%;
+      font-size: 0.85rem;
+    }
+    footer strong { color: #fff; }
+    footer a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav ul { gap: 1.2rem; }
+      .about-card { padding: 24px 22px; }
+      .job { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-name">Putri Wanna</span>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Learning Support Educator · Shenzhen, China</div>
+      <h1>Putri Wanna</h1>
+      <p class="hero-role">Head of Learning Support &amp; LPYP Learning Support Teacher<br>
+        International School of Nanshan Shenzhen</p>
+      <p class="hero-quote">"An investment in knowledge pays the best interest." — Benjamin Franklin</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label" style="color: var(--teal);">Who I Am</div>
+      <h2>Championing every learner's journey</h2>
+      <div class="about-card">
+        <p>I aim to support students to reach their full potential as successful, empowered learners within an inclusive educational environment.</p>
+        <p>Every child is unique and may have different learning styles. Our role, as educators, relies on facilitating and ensuring our learners grow and enjoy their learning journey.</p>
+        <p>I work closely with students, teachers, parents, and the wider school community — through workshops, co-teaching, ILP/SSP development, and professional development — to build truly inclusive spaces where every child belongs.</p>
+        <span class="motto">Inclusion is an Act.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-inner">
+      <div class="section-label" style="color: var(--coral);">Career</div>
+      <h2>Professional Experience</h2>
+      <div class="timeline">
+
+        <div class="job">
+          <div class="job-title">Head of Learning Support &amp; LPYP Learning Support Teacher</div>
+          <div class="job-org">International School of Nanshan Shenzhen (ISNS)</div>
+          <div class="job-meta">Sep 2021 – Present · Shenzhen, Guangdong, China</div>
+          <div class="job-desc">Lead the Student Support Team in delivering inclusive education across the Primary Years Programme. Facilitate parent workshops, co-design ILPs and SSPs, run professional development for PYP teachers on interventions and accommodations, and collaborate school-wide to embed the IB learner profile into daily practice.</div>
+        </div>
+
+        <div class="job">
+          <div class="job-title">E-commerce Trainer</div>
+          <div class="job-org">Bukalapak</div>
+          <div class="job-meta">Jan 2015 – Jan 2019 · Contract</div>
+          <div class="job-desc">Delivered community learning programs, including workshops with Intel's Rusunawa Jatinegara initiative, empowering people with digital commerce skills.</div>
+        </div>
+
+        <div class="job">
+          <div class="job-title">IFRS Consultant</div>
+          <div class="job-org">Deloitte</div>
+          <div class="job-meta">Jan 2011 – Jun 2014 · Greater Jakarta Area, Indonesia</div>
+          <div class="job-desc">Provided advisory services on International Financial Reporting Standards, supporting organisations through compliance and financial transformation projects.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-inner">
+      <div class="section-label" style="color: #C9960C;">Academic Background</div>
+      <h2>Education</h2>
+      <div class="edu-grid">
+
+        <div class="edu-card">
+          <div class="edu-degree">Doctor of Education (EdD)</div>
+          <div class="edu-school">University College Fairview</div>
+          <div class="edu-year">Apr 2026 – Apr 2029 · In Progress</div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-degree">MSc, International Trade, Strategies &amp; Operations</div>
+          <div class="edu-school">University of Warwick</div>
+          <div class="edu-year">2016 – 2017</div>
+          <span class="edu-grade">Grade: Distinction</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section id="expertise">
+    <div class="section-inner">
+      <div class="section-label" style="color: var(--coral);">Skills &amp; Focus Areas</div>
+      <h2>Areas of Expertise</h2>
+      <div class="chips">
+        <span class="chip chip-coral">Learning Support (ILP/SSP)</span>
+        <span class="chip chip-coral">Inclusive Education</span>
+        <span class="chip chip-teal">IB PYP Framework</span>
+        <span class="chip chip-teal">Literacy Intervention</span>
+        <span class="chip chip-teal">Math Group Intervention</span>
+        <span class="chip chip-yellow">Executive Functioning Skills</span>
+        <span class="chip chip-yellow">ATL Skills Coaching</span>
+        <span class="chip chip-yellow">Parent &amp; Teacher Workshops</span>
+        <span class="chip chip-purple">Neurodiversity-Affirming Practice</span>
+        <span class="chip chip-purple">Technology Integration</span>
+        <span class="chip chip-purple">AI in Education</span>
+        <span class="chip chip-coral">Phonics &amp; Early Literacy</span>
+        <span class="chip chip-teal">Student Wellbeing</span>
+        <span class="chip chip-yellow">Middle Leadership</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-inner">
+      <div class="section-label" style="color: var(--lavender);">Continuing Education</div>
+      <h2>Certifications &amp; Professional Development</h2>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Leading Inclusive Communities – Neurodivergent</div>
+            <div class="cert-issuer">PD Academia · 2026</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">AI in the Classroom</div>
+            <div class="cert-issuer">Canva · Apr 2026</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">AI Literacy Skills Certificate</div>
+            <div class="cert-issuer">Toddle – Your Teaching Partner · Aug 2025</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Executive Function Skills – Untapped Learning</div>
+            <div class="cert-issuer">Professional Development · 2025–2026</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">SST Middle Leadership Observation &amp; Reflection</div>
+            <div class="cert-issuer">ISNS · 2025–2026</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">IB Educator Capabilities for Middle Leaders</div>
+            <div class="cert-issuer">International School of Nanshan Shenzhen · 2025–2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Putri Wanna</strong> · Head of Learning Support</p>
+    <p style="margin-top:6px;">International School of Nanshan Shenzhen · Shenzhen, China</p>
+    <p style="margin-top:12px;">
+      <a href="https://www.linkedin.com/in/putri-wanna/" target="_blank" rel="noopener">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="https://padlet.com/putriwanna/putri-wanna-s-professional-portfolio-10qqm8h8epom6bmv" target="_blank" rel="noopener">Professional Portfolio (Padlet)</a>
+    </p>
+    <p style="margin-top:20px; font-size:0.75rem; opacity:0.5;">© 2026 Putri Wanna</p>
+  </footer>
+
+</body>
+</html>
