@@ -61,6 +61,60 @@
     }
     nav a:hover { color: #fff; }
 
+    /* ── PORTFOLIO DROPDOWN ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      padding-top: 12px;
+      z-index: 110;
+    }
+    .nav-dropdown-menu-inner {
+      background: var(--maroon-dark);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 8px;
+      min-width: 260px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+    }
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 9px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+      white-space: nowrap;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+    .mobile-dropdown-row { display: flex; align-items: center; }
+    .mobile-dropdown-row a { flex: 1; }
+    .mobile-dropdown-toggle {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.7rem;
+      padding: 14px 5%;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .mobile-dropdown-toggle:hover { color: #fff; }
+    .mobile-dropdown-menu { display: none; background: rgba(0,0,0,0.18); }
+    .mobile-dropdown-menu.open { display: block; }
+    .mobile-dropdown-menu a {
+      display: block;
+      padding: 12px 5% 12px 9%;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.88rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mobile-dropdown-menu a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+
     /* ── PAGE HEADER ── */
     .page-header {
       background: var(--maroon-dark);
@@ -387,7 +441,21 @@
 <li><a href="index.html#experience">Experience</a></li>
 <li><a href="index.html#education">Education</a></li>
 <li><a href="index.html#expertise">Expertise</a></li>
-<li><a href="index.html#portfolio">Portfolio</a></li>
+<li class="nav-dropdown">
+  <a href="index.html#portfolio">Portfolio</a>
+  <div class="nav-dropdown-menu">
+    <div class="nav-dropdown-menu-inner">
+      <a href="in-practice.html">🏫 Learning Support in Practice</a>
+      <a href="goals.html">📋 Learning Support Goals</a>
+      <a href="observations.html">📝 Professional Observation Notes</a>
+      <a href="professional-development.html">🎓 Professional Development</a>
+      <a href="ib-capabilities.html">🌍 IB Educator Capabilities</a>
+      <a href="collaboration.html">🤝 Collaboration &amp; Community</a>
+      <a href="iste.html">📐 ISTE Standards</a>
+      <a href="resources.html">📚 Resources</a>
+    </div>
+  </div>
+</li>
 </ul>
 <button aria-expanded="false" aria-label="Open menu" class="hamburger" id="hamburger">
 <span></span><span></span><span></span>
@@ -399,7 +467,22 @@
 <li><a href="index.html#experience">Experience</a></li>
 <li><a href="index.html#education">Education</a></li>
 <li><a href="index.html#expertise">Expertise</a></li>
-<li><a href="index.html#portfolio">Portfolio</a></li>
+<li class="mobile-dropdown">
+  <div class="mobile-dropdown-row">
+    <a href="index.html#portfolio">Portfolio</a>
+    <button aria-expanded="false" aria-label="Show portfolio pages" class="mobile-dropdown-toggle" type="button">▾</button>
+  </div>
+  <div class="mobile-dropdown-menu">
+    <a href="in-practice.html">🏫 Learning Support in Practice</a>
+    <a href="goals.html">📋 Learning Support Goals</a>
+    <a href="observations.html">📝 Professional Observation Notes</a>
+    <a href="professional-development.html">🎓 Professional Development</a>
+    <a href="ib-capabilities.html">🌍 IB Educator Capabilities</a>
+    <a href="collaboration.html">🤝 Collaboration &amp; Community</a>
+    <a href="iste.html">📐 ISTE Standards</a>
+    <a href="resources.html">📚 Resources</a>
+  </div>
+</li>
 </ul>
 </div>
 <div class="page-header">
@@ -560,6 +643,7 @@
 <a class="portfolio-nav-link" href="professional-development.html">🎓 Professional Development</a>
 <a class="portfolio-nav-link" href="ib-capabilities.html">🌍 IB Educator Capabilities</a>
 <a class="portfolio-nav-link" href="iste.html">📐 ISTE Standards</a>
+<a class="portfolio-nav-link" href="resources.html">📚 Resources</a>
 </div>
 </section>
 <footer>
@@ -583,6 +667,16 @@
         mobileMenu.classList.remove('open');
         hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.querySelectorAll('.mobile-dropdown-toggle').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const menu = btn.closest('.mobile-dropdown').querySelector('.mobile-dropdown-menu');
+        const isOpen = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+        btn.textContent = isOpen ? '▴' : '▾';
       });
     });
   
