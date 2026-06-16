@@ -311,9 +311,75 @@
     footer strong { color: #fff; }
     footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: #fff; }
-  </style>
+  
+    /* ── LIGHTBOX ── */
+    .lb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.88);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      cursor: zoom-out;
+    }
+    .lb-overlay.active { display: flex; }
+    .lb-box {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .lb-box img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    .lb-caption {
+      color: #fff;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      max-width: 680px;
+    }
+    .lb-caption strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .lb-close {
+      position: fixed;
+      top: 20px;
+      right: 28px;
+      font-size: 2rem;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.8;
+    }
+    .lb-close:hover { opacity: 1; }
+    .photo-card { cursor: pointer; }
+    .photo-card:hover img { opacity: 0.9; transition: opacity 0.2s; }
+</style>
 </head>
 <body>
+<div aria-modal="true" class="lb-overlay" id="lightbox" role="dialog">
+<div class="lb-box" id="lbBox">
+<button aria-label="Close" class="lb-close" id="lbClose">✕</button>
+<img alt="" id="lbImg" src=""/>
+<div class="lb-caption" id="lbCaption"></div>
+</div>
+</div>
+
 <nav>
 <a class="nav-name" href="index.html">Putri Wanna</a>
 <ul>
@@ -355,57 +421,55 @@
 <h2>Parent &amp; Teacher Workshops</h2>
 <p class="section-desc">Designing and facilitating workshops that build capacity — empowering parents to support learning at home and equipping teachers with inclusive strategies for the classroom.</p>
 <div class="photo-grid wide">
-
 <div class="photo-card">
 <div class="photo-media landscape">
-<img alt="EdTech Guangzhou 25-26" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-edtech-guangzhou-2526.jpg"/></div>
+<img alt="EdTech Guangzhou 25-26" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-edtech-guangzhou-2526.jpg"/></div>
 <p class="photo-caption"><strong>EdTech Guangzhou 25-26</strong>Presenting at the EdTech Guangzhou conference on learning support and technology integration · 2025–2026</p>
 </div>
 <div class="photo-card">
 <div class="photo-media landscape">
-<img alt="Leading a LPYP Parent Workshop 25-26" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-leading-a-lpyp-parent-workshop.jpg"/></div>
+<img alt="Leading a LPYP Parent Workshop 25-26" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-leading-a-lpyp-parent-workshop.jpg"/></div>
 <p class="photo-caption"><strong>LPYP Parent Workshop – Learning Engagement</strong>Facilitating a parent workshop on supporting learning engagement at home · Semester 1, 2025–2026</p>
 </div>
-
 <div class="photo-card">
 <div class="photo-media landscape">
-<img alt="Future of Learning HK 25-26" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-future-of-learning-hk-2526.jpg"/>
+<img alt="Future of Learning HK 25-26" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-future-of-learning-hk-2526.jpg"/>
 </div>
 <p class="photo-caption"><strong>Future of Learning HK 25-26</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media landscape">
-<img alt="LS collaborated with the Counseling team to host our first parent talk 25-26" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-ls-collaborated-with-the.jpg"/>
+<img alt="LS collaborated with the Counseling team to host our first parent talk 25-26" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-ls-collaborated-with-the.jpg"/>
 </div>
 <p class="photo-caption"><strong>LS collaborated with the Counseling team to host our first parent talk 25-26</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media landscape">
-<img alt="Teacher Led Session for SST 25-26" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-teacher-led-session-for-sst.jpg"/>
+<img alt="Teacher Led Session for SST 25-26" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-teacher-led-session-for-sst.jpg"/>
 </div>
 <p class="photo-caption"><strong>Teacher Led Session for SST 25-26</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media landscape">
-<img alt="Building Executive Function Competencies for PYP Learners -  SENIA Cambodia 2025" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-building-executive-function.jpg"/>
+<img alt="Building Executive Function Competencies for PYP Learners -  SENIA Cambodia 2025" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-building-executive-function.jpg"/>
 </div>
 <p class="photo-caption"><strong>Building Executive Function Competencies for PYP Learners -  SENIA Cambodia 2025</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media landscape">
-<img alt="Executive Function Skills for PYP Learners -  Parent Workshop" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-executive-function-skills-for.jpg"/>
+<img alt="Executive Function Skills for PYP Learners -  Parent Workshop" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-executive-function-skills-for.jpg"/>
 </div>
 <p class="photo-caption"><strong>Executive Function Skills for PYP Learners -  Parent Workshop</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media landscape">
-<img alt="Sensory Tools - Teacher Led Session" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-sensory-tools-teacher-led.jpg"/>
+<img alt="Sensory Tools - Teacher Led Session" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-sensory-tools-teacher-led.jpg"/>
 </div>
 <p class="photo-caption"><strong>Sensory Tools - Teacher Led Session</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media landscape">
-<img alt="Parent Workshop 2024 - 2025" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-parent-workshop-2024-2025.jpg"/>
+<img alt="Parent Workshop 2024 - 2025" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/workshop-parent-workshop-2024-2025.jpg"/>
 </div>
 <p class="photo-caption"><strong>Parent Workshop 2024 - 2025</strong></p>
 </div>
@@ -421,24 +485,23 @@
 <div class="photo-grid">
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Diversity Day 25-26" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/event-diversity-day-2526.jpg"/></div>
+<img alt="Diversity Day 25-26" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/event-diversity-day-2526.jpg"/></div>
 <p class="photo-caption"><strong>Diversity Day 2025–2026</strong>"Diversity is the Fruit, Equity is the Root" – celebrating the school's diverse community · 2025–2026</p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Bullying Awareness Week 24-25" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/event-bullying-awareness-week-2425.jpg"/></div>
+<img alt="Bullying Awareness Week 24-25" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/event-bullying-awareness-week-2425.jpg"/></div>
 <p class="photo-caption"><strong>Bullying Awareness Week 2024–2025</strong>Raising awareness about kindness, belonging, and anti-bullying across the school community · 2024–2025</p>
 </div>
-
 <div class="photo-card">
 <div class="photo-media">
-<img alt="ISNS Family Fun Day 24-25" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/event-isns-family-fun-day-2425.jpg"/>
+<img alt="ISNS Family Fun Day 24-25" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/event-isns-family-fun-day-2425.jpg"/>
 </div>
 <p class="photo-caption"><strong>ISNS Family Fun Day 24-25</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Bullying Awareness Days" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/event-bullying-awareness-days.jpg"/>
+<img alt="Bullying Awareness Days" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/event-bullying-awareness-days.jpg"/>
 </div>
 <p class="photo-caption"><strong>Bullying Awareness Days</strong></p>
 </div>
@@ -454,15 +517,14 @@
 <div class="photo-grid">
 <div class="photo-card">
 <div class="photo-media">
-<img alt="LS Team 25-26" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/collab-ls-team-2526.jpg"/></div>
+<img alt="LS Team 25-26" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/collab-ls-team-2526.jpg"/></div>
 <p class="photo-caption"><strong>LS Team 2025–2026</strong>The Learning Support team at ISNS · 2025–2026</p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="We were about to start our first 'circle' with the S3T members." onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/collab-we-were-about-to-start-our.jpg"/></div>
+<img alt="We were about to start our first 'circle' with the S3T members." loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/collab-we-were-about-to-start-our.jpg"/></div>
 <p class="photo-caption"><strong>First Circle with S3T Members</strong>Starting our first structured 'circle' session with the Student Support &amp; Services Team · 2025–2026</p>
 </div>
-
 </div>
 </div>
 </section>
@@ -473,18 +535,15 @@
 <h2>Working with Teachers</h2>
 <p class="section-desc">Co-planning, co-teaching, and consulting with classroom teachers to design inclusive learning environments and ensure every student's needs are met within the mainstream setting.</p>
 <div class="photo-grid">
-
-
-
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Motivation Workshop conducted by Student Support Team" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/teachers-motivation-workshop-conducted.jpg"/>
+<img alt="Motivation Workshop conducted by Student Support Team" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/teachers-motivation-workshop-conducted.jpg"/>
 </div>
 <p class="photo-caption"><strong>Motivation Workshop conducted by Student Support Team</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Working with Learning Support and Counsellor Team" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/teachers-working-with-learning-support.jpg"/>
+<img alt="Working with Learning Support and Counsellor Team" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/teachers-working-with-learning-support.jpg"/>
 </div>
 <p class="photo-caption"><strong>Working with Learning Support and Counsellor Team</strong></p>
 </div>
@@ -525,6 +584,38 @@
         hamburger.setAttribute('aria-expanded', 'false');
       });
     });
-  </script>
+  
+  // Lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCaption = document.getElementById('lbCaption');
+  const lbBox = document.getElementById('lbBox');
+
+  document.querySelectorAll('.photo-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const img = card.querySelector('img');
+      const caption = card.querySelector('.photo-caption');
+      if (!img) return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      const strong = caption ? caption.querySelector('strong') : null;
+      const title = strong ? strong.textContent : '';
+      const desc = caption ? caption.textContent.replace(title, '').trim() : '';
+      lbCaption.innerHTML = (title ? '<strong>' + title + '</strong>' : '') + (desc || '');
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLb() {
+    lb.classList.remove('active');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+</script>
 </body>
 </html>

@@ -315,9 +315,75 @@
     footer strong { color: #fff; }
     footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: #fff; }
-  </style>
+  
+    /* ── LIGHTBOX ── */
+    .lb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.88);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      cursor: zoom-out;
+    }
+    .lb-overlay.active { display: flex; }
+    .lb-box {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .lb-box img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    .lb-caption {
+      color: #fff;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      max-width: 680px;
+    }
+    .lb-caption strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .lb-close {
+      position: fixed;
+      top: 20px;
+      right: 28px;
+      font-size: 2rem;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.8;
+    }
+    .lb-close:hover { opacity: 1; }
+    .photo-card { cursor: pointer; }
+    .photo-card:hover img { opacity: 0.9; transition: opacity 0.2s; }
+</style>
 </head>
 <body>
+<div aria-modal="true" class="lb-overlay" id="lightbox" role="dialog">
+<div class="lb-box" id="lbBox">
+<button aria-label="Close" class="lb-close" id="lbClose">✕</button>
+<img alt="" id="lbImg" src=""/>
+<div class="lb-caption" id="lbCaption"></div>
+</div>
+</div>
+
 <nav>
 <a class="nav-name" href="index.html">Putri Wanna</a>
 <ul>
@@ -364,67 +430,66 @@
 <div class="photo-grid">
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Math Group Intervention" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-math-group.jpg"/>
+<img alt="Math Group Intervention" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-math-group.jpg"/>
 </div>
 <p class="photo-caption"><strong>Math Group Intervention</strong>Working on number accuracy and fluency in a small group setting.</p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Executive Functioning Skills – Jenga" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-exec-jenga.jpg"/>
+<img alt="Executive Functioning Skills – Jenga" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-exec-jenga.jpg"/>
 </div>
 <p class="photo-caption"><strong>Executive Functioning Skills – Jenga</strong>Using Jenga to develop planning, impulse control, and turn-taking skills.</p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Small Group Work – I Spy &amp; Sentence Creation" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-small-group-ispy.jpg"/>
+<img alt="Small Group Work – I Spy &amp; Sentence Creation" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-small-group-ispy.jpg"/>
 </div>
 <p class="photo-caption"><strong>Small Group Work – I Spy &amp; Sentence Creation</strong>Building vocabulary and sentence structure through guided play.</p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Arranging Words to Structure Sentences Activity" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-arranging-words-to-structure.jpg"/></div>
+<img alt="Arranging Words to Structure Sentences Activity" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=&quot;photo-placeholder&quot;&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-arranging-words-to-structure.jpg"/></div>
 <p class="photo-caption"><strong>Arranging Words to Structure Sentences</strong>Hands-on activity to reinforce syntax and reading comprehension.</p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Working on Executive Functioning Skills" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-exec-skills.jpg"/>
+<img alt="Working on Executive Functioning Skills" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-exec-skills.jpg"/>
 </div>
 <p class="photo-caption"><strong>Working on Executive Functioning Skills</strong>Targeted strategies to support planning, organisation, and task initiation.</p>
 </div>
-
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Beginning, Middle, and Ending Sound Isolation" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-beginning-middle-and-ending.jpg"/>
+<img alt="Beginning, Middle, and Ending Sound Isolation" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-beginning-middle-and-ending.jpg"/>
 </div>
 <p class="photo-caption"><strong>Beginning, Middle, and Ending Sound Isolation</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Decoding and Encoding Activity" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-decoding-and-encoding-activity.jpg"/>
+<img alt="Decoding and Encoding Activity" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-decoding-and-encoding-activity.jpg"/>
 </div>
 <p class="photo-caption"><strong>Decoding and Encoding Activity</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Using board game for vocabulary enhancement" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-using-board-game-for.jpg"/>
+<img alt="Using board game for vocabulary enhancement" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-using-board-game-for.jpg"/>
 </div>
 <p class="photo-caption"><strong>Using board game for vocabulary enhancement</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Helping students to stay on task." onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-helping-students-to-stay-on.jpg"/>
+<img alt="Helping students to stay on task." loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-helping-students-to-stay-on.jpg"/>
 </div>
 <p class="photo-caption"><strong>Helping students to stay on task.</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Push-in session in the classroom" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-pushin-session-in-the.jpg"/>
+<img alt="Push-in session in the classroom" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-pushin-session-in-the.jpg"/>
 </div>
 <p class="photo-caption"><strong>Push-in session in the classroom</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Phonics practice with play-based learning" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-phonics-practice-with.jpg"/>
+<img alt="Phonics practice with play-based learning" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/students-phonics-practice-with.jpg"/>
 </div>
 <p class="photo-caption"><strong>Phonics practice with play-based learning</strong></p>
 </div>
@@ -438,67 +503,63 @@
 <h2>Literacy Support &amp; Students' Work</h2>
 <p class="section-desc">Samples of student work showing progress in phonics, reading fluency, comprehension, and written expression across grade levels.</p>
 <div class="photo-grid">
-
-
-
-
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Using Flashcards in Reading and Speaking Intervention" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-using-flashcards-in-reading.jpg"/>
+<img alt="Using Flashcards in Reading and Speaking Intervention" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-using-flashcards-in-reading.jpg"/>
 </div>
 <p class="photo-caption"><strong>Using Flashcards in Reading and Speaking Intervention</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Decoding and Encoding Practices" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-decoding-and-encoding.jpg"/>
+<img alt="Decoding and Encoding Practices" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-decoding-and-encoding.jpg"/>
 </div>
 <p class="photo-caption"><strong>Decoding and Encoding Practices</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Practice on Decoding Skills (Published Story)" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-practice-on-decoding-skills.jpg"/>
+<img alt="Practice on Decoding Skills (Published Story)" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-practice-on-decoding-skills.jpg"/>
 </div>
 <p class="photo-caption"><strong>Practice on Decoding Skills (Published Story)</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Using Sentence Starters to Help Student Write a Paragraph" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-using-sentence-started-to-help.jpg"/>
+<img alt="Using Sentence Starters to Help Student Write a Paragraph" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-using-sentence-started-to-help.jpg"/>
 </div>
 <p class="photo-caption"><strong>Using Sentence Starters to Help Student Write a Paragraph</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Working on Encoding Skills" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-working-on-encoding-skills.jpg"/>
+<img alt="Working on Encoding Skills" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-working-on-encoding-skills.jpg"/>
 </div>
 <p class="photo-caption"><strong>Working on Encoding Skills</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Vocabulary Enhancement  with Flashcards" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-vocabulary-enhancement-with.jpg"/>
+<img alt="Vocabulary Enhancement  with Flashcards" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-vocabulary-enhancement-with.jpg"/>
 </div>
 <p class="photo-caption"><strong>Vocabulary Enhancement  with Flashcards</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Decoding and Vocabulary Enhancement" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-decoding-and-vocabulary.jpg"/>
+<img alt="Decoding and Vocabulary Enhancement" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-decoding-and-vocabulary.jpg"/>
 </div>
 <p class="photo-caption"><strong>Decoding and Vocabulary Enhancement</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Blending Letters - CVC Words" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-blending-letters-cvc-words.jpg"/>
+<img alt="Blending Letters - CVC Words" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-blending-letters-cvc-words.jpg"/>
 </div>
 <p class="photo-caption"><strong>Blending Letters - CVC Words</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Creating Simple Sentences" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-creating-simple-sentences.jpg"/>
+<img alt="Creating Simple Sentences" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-creating-simple-sentences.jpg"/>
 </div>
 <p class="photo-caption"><strong>Creating Simple Sentences</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Phonemic Awareness Assessment" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-phonemic-awareness-assessment.jpg"/>
+<img alt="Phonemic Awareness Assessment" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/lit-phonemic-awareness-assessment.jpg"/>
 </div>
 <p class="photo-caption"><strong>Phonemic Awareness Assessment</strong></p>
 </div>
@@ -512,72 +573,69 @@
 <h2>Executive Functioning Skills</h2>
 <p class="section-desc">Structured activities and strategies that build planning, working memory, flexible thinking, and emotional regulation in learners who need additional support.</p>
 <div class="photo-grid">
-
-
-
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Attention Focus and Fair Play Rule Support for EY learner." onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-attention-focus-and-fair-play.jpg"/>
+<img alt="Attention Focus and Fair Play Rule Support for EY learner." loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-attention-focus-and-fair-play.jpg"/>
 </div>
 <p class="photo-caption"><strong>Attention Focus and Fair Play Rule Support for EY learner.</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Brief Check-in and Executive Function Intervention with Early Year Student" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-brief-checkin-and-executive.jpg"/>
+<img alt="Brief Check-in and Executive Function Intervention with Early Year Student" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-brief-checkin-and-executive.jpg"/>
 </div>
 <p class="photo-caption"><strong>Brief Check-in and Executive Function Intervention with Early Year Student</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Provide Students with Sensory Tools to Accommodate their Needs" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-provide-students-with-sensory.jpg"/>
+<img alt="Provide Students with Sensory Tools to Accommodate their Needs" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-provide-students-with-sensory.jpg"/>
 </div>
 <p class="photo-caption"><strong>Provide Students with Sensory Tools to Accommodate their Needs</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Task Initiation and Attention to Focus Support" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-task-initiation-and-attention.jpg"/>
+<img alt="Task Initiation and Attention to Focus Support" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-task-initiation-and-attention.jpg"/>
 </div>
 <p class="photo-caption"><strong>Task Initiation and Attention to Focus Support</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Work Completion and Time-Management Skills Support" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-work-completion-and.jpg"/>
+<img alt="Work Completion and Time-Management Skills Support" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-work-completion-and.jpg"/>
 </div>
 <p class="photo-caption"><strong>Work Completion and Time-Management Skills Support</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Task Initiation and Attention Focus Support" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-task-initiation-and-attention.jpg"/>
+<img alt="Task Initiation and Attention Focus Support" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-task-initiation-and-attention.jpg"/>
 </div>
 <p class="photo-caption"><strong>Task Initiation and Attention Focus Support</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Dictation Activity to Improve Student's Listening Skills and Attention Focus" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-dictation-activity-to-improve.jpg"/>
+<img alt="Dictation Activity to Improve Student's Listening Skills and Attention Focus" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-dictation-activity-to-improve.jpg"/>
 </div>
 <p class="photo-caption"><strong>Dictation Activity to Improve Student's Listening Skills and Attention Focus</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Play Day - Working on Developing Student's Social Skills" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-play-day-working-on-developing.jpg"/>
+<img alt="Play Day - Working on Developing Student's Social Skills" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-play-day-working-on-developing.jpg"/>
 </div>
 <p class="photo-caption"><strong>Play Day - Working on Developing Student's Social Skills</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Replacement Skill Teaching" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-replacement-skill-teaching.jpg"/>
+<img alt="Replacement Skill Teaching" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-replacement-skill-teaching.jpg"/>
 </div>
 <p class="photo-caption"><strong>Replacement Skill Teaching</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Work on Developing Social Skills" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-work-on-developing-social.jpg"/>
+<img alt="Work on Developing Social Skills" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-work-on-developing-social.jpg"/>
 </div>
 <p class="photo-caption"><strong>Work on Developing Social Skills</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Behavior Checklist" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-behavior-checklist.jpg"/>
+<img alt="Behavior Checklist" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/exec-behavior-checklist.jpg"/>
 </div>
 <p class="photo-caption"><strong>Behavior Checklist</strong></p>
 </div>
@@ -591,66 +649,63 @@
 <h2>Math Group Intervention</h2>
 <p class="section-desc">Targeted small-group numeracy support helping students build accuracy, fluency, and confidence with mathematical concepts.</p>
 <div class="photo-grid">
-
-
-
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Students Practice Solving Place Value  Math Problems" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-students-practice-solving.jpg"/>
+<img alt="Students Practice Solving Place Value  Math Problems" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-students-practice-solving.jpg"/>
 </div>
 <p class="photo-caption"><strong>Students Practice Solving Place Value  Math Problems</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Using Blocks to Solve Divison Math Problems" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-using-blocks-to-solve-divison.jpg"/>
+<img alt="Using Blocks to Solve Divison Math Problems" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-using-blocks-to-solve-divison.jpg"/>
 </div>
 <p class="photo-caption"><strong>Using Blocks to Solve Divison Math Problems</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Line Number as a Supporting Tool" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-line-number-as-a-supporting.jpg"/>
+<img alt="Line Number as a Supporting Tool" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-line-number-as-a-supporting.jpg"/>
 </div>
 <p class="photo-caption"><strong>Line Number as a Supporting Tool</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Math Assessment" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-math-assessment.jpg"/>
+<img alt="Math Assessment" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-math-assessment.jpg"/>
 </div>
 <p class="photo-caption"><strong>Math Assessment</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Three-digit Addition" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-threedigit-addition.jpg"/>
+<img alt="Three-digit Addition" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-threedigit-addition.jpg"/>
 </div>
 <p class="photo-caption"><strong>Three-digit Addition</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Place Value - Identifying Hundreds, Tens, Ones" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-place-value-identifying.jpg"/>
+<img alt="Place Value - Identifying Hundreds, Tens, Ones" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-place-value-identifying.jpg"/>
 </div>
 <p class="photo-caption"><strong>Place Value - Identifying Hundreds, Tens, Ones</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Math Dominoes - Creating a Fun Math Activity for Students" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-math-dominoes-creating-a-fun.jpg"/>
+<img alt="Math Dominoes - Creating a Fun Math Activity for Students" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-math-dominoes-creating-a-fun.jpg"/>
 </div>
 <p class="photo-caption"><strong>Math Dominoes - Creating a Fun Math Activity for Students</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Using Ten-Frame Tool" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-using-tenframe-tool.jpg"/>
+<img alt="Using Ten-Frame Tool" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-using-tenframe-tool.jpg"/>
 </div>
 <p class="photo-caption"><strong>Using Ten-Frame Tool</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Students' Individual Math Assessment" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-students-individual-math.jpg"/>
+<img alt="Students' Individual Math Assessment" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-students-individual-math.jpg"/>
 </div>
 <p class="photo-caption"><strong>Students' Individual Math Assessment</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Students are working on identifying 2D and 3D shapes" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-students-are-working-on.jpg"/>
+<img alt="Students are working on identifying 2D and 3D shapes" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/math-students-are-working-on.jpg"/>
 </div>
 <p class="photo-caption"><strong>Students are working on identifying 2D and 3D shapes</strong></p>
 </div>
@@ -664,42 +719,39 @@
 <h2>ATL Skills Evidence</h2>
 <p class="section-desc">Explicit teaching and documentation of IB Approaches to Learning skills — thinking, communication, self-management, research, and social skills — woven into every intervention.</p>
 <div class="photo-grid">
-
-
-
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Allowing a Student to Think and Share which ATLs Skills He Used during the Intervention" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-allowing-a-student-to-think.jpg"/>
+<img alt="Allowing a Student to Think and Share which ATLs Skills He Used during the Intervention" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-allowing-a-student-to-think.jpg"/>
 </div>
 <p class="photo-caption"><strong>Allowing a Student to Think and Share which ATLs Skills He Used during the Intervention</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="ATL Skills Poster" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-atl-skills-poster.jpg"/>
+<img alt="ATL Skills Poster" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-atl-skills-poster.jpg"/>
 </div>
 <p class="photo-caption"><strong>ATL Skills Poster</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Thinking and Communication Skills" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-thinking-and-communication.jpg"/>
+<img alt="Thinking and Communication Skills" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-thinking-and-communication.jpg"/>
 </div>
 <p class="photo-caption"><strong>Thinking and Communication Skills</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Thinking, Communication, and Self- Management Skills" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-thinking-communication-and.jpg"/>
+<img alt="Thinking, Communication, and Self- Management Skills" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-thinking-communication-and.jpg"/>
 </div>
 <p class="photo-caption"><strong>Thinking, Communication, and Self- Management Skills</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Thinking and Self-Management Skills" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-thinking-and-selfmanagement.jpg"/>
+<img alt="Thinking and Self-Management Skills" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-thinking-and-selfmanagement.jpg"/>
 </div>
 <p class="photo-caption"><strong>Thinking and Self-Management Skills</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Thinking, Communication, Self-management, and Social Skills" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-thinking-communication.jpg"/>
+<img alt="Thinking, Communication, Self-management, and Social Skills" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/atl-thinking-communication.jpg"/>
 </div>
 <p class="photo-caption"><strong>Thinking, Communication, Self-management, and Social Skills</strong></p>
 </div>
@@ -713,42 +765,39 @@
 <h2>Technology Integration</h2>
 <p class="section-desc">Purposeful use of technology tools — including AI, UFLI, RAZ Kids, and Reading Coach — to personalise learning and extend access for students with additional needs.</p>
 <div class="photo-grid">
-
-
-
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Reviewing Student's Progress" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-reviewing-students-progress.jpg"/>
+<img alt="Reviewing Student's Progress" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-reviewing-students-progress.jpg"/>
 </div>
 <p class="photo-caption"><strong>Reviewing Student's Progress</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Use UFLI Blending Board to Blend Graphemes into Words" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-use-ufli-blending-board-to.jpg"/>
+<img alt="Use UFLI Blending Board to Blend Graphemes into Words" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-use-ufli-blending-board-to.jpg"/>
 </div>
 <p class="photo-caption"><strong>Use UFLI Blending Board to Blend Graphemes into Words</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Nessy Apps for Literacy Building" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-nessy-apps-for-literacy.jpg"/>
+<img alt="Nessy Apps for Literacy Building" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-nessy-apps-for-literacy.jpg"/>
 </div>
 <p class="photo-caption"><strong>Nessy Apps for Literacy Building</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Khan Kid Apps" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-khan-kid-apps.jpg"/>
+<img alt="Khan Kid Apps" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-khan-kid-apps.jpg"/>
 </div>
 <p class="photo-caption"><strong>Khan Kid Apps</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Khan Kid - Letter Sound and Blending Letters" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-khan-kid-letter-sound-and.jpg"/>
+<img alt="Khan Kid - Letter Sound and Blending Letters" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-khan-kid-letter-sound-and.jpg"/>
 </div>
 <p class="photo-caption"><strong>Khan Kid - Letter Sound and Blending Letters</strong></p>
 </div>
 <div class="photo-card">
 <div class="photo-media">
-<img alt="Khan Kid - CVC Words (Decode and Encode Practices)" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-khan-kid-cvc-words-decode-and.jpg"/>
+<img alt="Khan Kid - CVC Words (Decode and Encode Practices)" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/tech-khan-kid-cvc-words-decode-and.jpg"/>
 </div>
 <p class="photo-caption"><strong>Khan Kid - CVC Words (Decode and Encode Practices)</strong></p>
 </div>
@@ -762,12 +811,9 @@
 <h2>After School Activity</h2>
 <p class="section-desc">Extending learning support beyond regular school hours — fostering engagement, confidence, and a love of learning in a relaxed, low-pressure setting.</p>
 <div class="photo-grid">
-
-
-
 <div class="photo-card">
 <div class="photo-media">
-<img alt="2024-2025 Creative Art Club for K4-K5 Students" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/after-school-20242025-creative-art-club-for.jpg"/>
+<img alt="2024-2025 Creative Art Club for K4-K5 Students" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/after-school-20242025-creative-art-club-for.jpg"/>
 </div>
 <p class="photo-caption"><strong>2024-2025 Creative Art Club for K4-K5 Students</strong></p>
 </div>
@@ -808,6 +854,38 @@
         hamburger.setAttribute('aria-expanded', 'false');
       });
     });
-  </script>
+  
+  // Lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCaption = document.getElementById('lbCaption');
+  const lbBox = document.getElementById('lbBox');
+
+  document.querySelectorAll('.photo-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const img = card.querySelector('img');
+      const caption = card.querySelector('.photo-caption');
+      if (!img) return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      const strong = caption ? caption.querySelector('strong') : null;
+      const title = strong ? strong.textContent : '';
+      const desc = caption ? caption.textContent.replace(title, '').trim() : '';
+      lbCaption.innerHTML = (title ? '<strong>' + title + '</strong>' : '') + (desc || '');
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLb() {
+    lb.classList.remove('active');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+</script>
 </body>
 </html>
