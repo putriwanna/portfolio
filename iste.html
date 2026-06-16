@@ -185,6 +185,72 @@
       box-shadow: 0 4px 16px rgba(49,0,4,0.1); transform: translateY(-2px);
     }
 
+    /* ── STANDARD WRITE-UP BLOCKS ── */
+    .standard-block {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 26px 24px; margin-bottom: 18px;
+    }
+    .standard-code {
+      display: inline-block; background: var(--maroon-pale); color: var(--maroon);
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;
+      padding: 4px 10px; border-radius: 6px; margin-bottom: 12px;
+    }
+    .standard-title { font-weight: 600; font-size: 1rem; margin-bottom: 10px; }
+    .standard-desc { font-size: 0.88rem; color: var(--text); margin-bottom: 14px; }
+    .standard-row { font-size: 0.85rem; margin-bottom: 6px; }
+    .standard-row strong { color: var(--maroon); }
+
+    /* ── EVIDENCE PHOTO GRID (reused from in-practice/collaboration pages) ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .standard-block .photo-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 14px; margin-top: 18px;
+    }
+    @media (max-width: 900px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .photo-grid { grid-template-columns: 1fr; } }
+    .photo-card { display: flex; flex-direction: column; gap: 10px; cursor: pointer; }
+    .photo-card:hover img { opacity: 0.9; transition: opacity 0.2s; }
+    .photo-media {
+      aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden; background: var(--maroon-pale);
+    }
+    .photo-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .photo-placeholder {
+      width: 100%; height: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      border: 2px dashed var(--border); border-radius: 10px; color: var(--muted);
+    }
+    .photo-placeholder span:first-child { font-size: 1.8rem; opacity: 0.45; }
+    .photo-placeholder span:last-child  { font-size: 0.78rem; font-weight: 500; }
+    .photo-caption { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+    .photo-caption strong { display: block; font-weight: 600; color: var(--text); font-size: 0.82rem; margin-bottom: 2px; }
+
+    /* ── LIGHTBOX ── */
+    .lb-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.88); align-items: center; justify-content: center;
+      padding: 24px; cursor: zoom-out;
+    }
+    .lb-overlay.active { display: flex; }
+    .lb-box {
+      position: relative; max-width: 900px; width: 100%; cursor: default;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .lb-box img {
+      width: 100%; max-height: 80vh; object-fit: contain;
+      border-radius: 10px; box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    .lb-caption { color: #fff; text-align: center; font-size: 0.95rem; line-height: 1.5; max-width: 680px; }
+    .lb-caption strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+    .lb-close {
+      position: fixed; top: 20px; right: 28px; font-size: 2rem; color: #fff;
+      background: none; border: none; cursor: pointer; line-height: 1; opacity: 0.8;
+    }
+    .lb-close:hover { opacity: 1; }
+
     /* ── HAMBURGER ── */
     .hamburger {
       display: none; flex-direction: column; justify-content: center;
@@ -227,6 +293,14 @@
   </style>
 </head>
 <body>
+
+  <div aria-modal="true" class="lb-overlay" id="lightbox" role="dialog">
+    <div class="lb-box" id="lbBox">
+      <button aria-label="Close" class="lb-close" id="lbClose">✕</button>
+      <img alt="" id="lbImg" src="" />
+      <div class="lb-caption" id="lbCaption"></div>
+    </div>
+  </div>
 
   <nav>
     <a href="index.html" class="nav-name">Putri Wanna</a>
@@ -294,22 +368,38 @@
       </div>
 
       <div class="capability-group">
-        <div class="capability-heading">ISTE Rubric &amp; Evidence</div>
+        <div class="capability-heading">ISTE Rubric</div>
         <div class="artifact-grid">
 
-          <div class="artifact-card placeholder">
+          <a href="documents/iste-rubric-2526.docx" class="artifact-card" download>
             <div class="artifact-card-icon">📊</div>
             <div class="artifact-card-title">ISTE Rubric 2025–2026</div>
             <div class="artifact-card-meta">ISTE Standards for Educators · 2025–2026</div>
-          </div>
-
-          <div class="artifact-card placeholder">
-            <div class="artifact-card-icon">📋</div>
-            <div class="artifact-card-title">Application of the ISTE Rubric 2025–2026</div>
-            <div class="artifact-card-meta">Evidence of ISTE standards application · 2025–2026</div>
-          </div>
+            <span class="artifact-card-link">Download ↓</span>
+          </a>
 
         </div>
+      </div>
+
+      <div class="capability-group">
+        <div class="capability-heading">Standards Applied</div>
+
+        <div class="standard-block">
+          <span class="standard-code">2.5.a</span>
+          <div class="standard-title">Accommodate Learner Differences</div>
+          <p class="standard-desc">Use technology to create, adapt and personalize learning experiences that foster independent learning and accommodate learner differences and needs.</p>
+          <p class="standard-row"><strong>Proficient</strong> — effectively personalizes learning experiences for diverse learners.</p>
+          <p class="standard-row"><strong>Daily application</strong> — allow students to use text-to-speech when needed, and allow students to use the UFLI mat board during the encoding activity.</p>
+        </div>
+
+        <div class="standard-block">
+          <span class="standard-code">2.7.c</span>
+          <div class="standard-title">Use Data to Guide Progress</div>
+          <p class="standard-desc">Use assessment data to guide progress and communicate with students, parents, and education stakeholders to build student self-direction.</p>
+          <p class="standard-row"><strong>Proficient</strong> — consistently analyzes and uses data to adjust instruction and support students.</p>
+          <p class="standard-row"><strong>Daily application</strong> — consistently use literacy data (e.g., IXL, core phonics), behavioral data, and social-emotional data (SSF) to help create and adjust the instruction and interventions provided to students.</p>
+        </div>
+
       </div>
     </div>
 
@@ -341,16 +431,95 @@
       </div>
 
       <div class="capability-group">
-        <div class="capability-heading">ISTE Rubric &amp; Evidence</div>
+        <div class="capability-heading">ISTE Rubric</div>
         <div class="artifact-grid">
 
-          <div class="artifact-card placeholder">
+          <a href="documents/iste-rubric-2425.pdf" class="artifact-card" download>
             <div class="artifact-card-icon">📊</div>
             <div class="artifact-card-title">ISTE Rubric 2024–2025</div>
             <div class="artifact-card-meta">ISTE Standards for Educators · 2024–2025</div>
-          </div>
+            <span class="artifact-card-link">Download ↓</span>
+          </a>
 
         </div>
+      </div>
+
+      <div class="capability-group">
+        <div class="capability-heading">Standards Applied</div>
+
+        <div class="standard-block">
+          <span class="standard-code">2.1.a</span>
+          <div class="standard-title">Learner</div>
+          <p class="standard-desc">Educators set professional learning goals to apply teaching practices made possible by technology, explore promising innovations, and reflect on their effectiveness.</p>
+          <p class="standard-row"><strong>Proficient</strong> — set clear, actionable professional learning goals that leverage technology effectively.</p>
+          <p class="standard-row"><strong>Application</strong> — facilitate learning with technology to support students' needs (e.g., UFLI, RAZ Kids, POE, DeepSeek, Canva).</p>
+
+          <div class="photo-grid">
+            <div class="photo-card">
+              <div class="photo-media">
+                <img alt="The Use of AI Tools to Gather Academic Resources" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/thumbs/iste-evidence-ai-tools-academic-resources.jpg" data-full="images/iste-evidence-ai-tools-academic-resources.jpg" />
+              </div>
+              <p class="photo-caption"><strong>AI Tools to Gather Academic Resources</strong></p>
+            </div>
+            <div class="photo-card">
+              <div class="photo-media">
+                <img alt="Integrating UFLI Word Mat into Literacy Intervention" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/thumbs/iste-evidence-ufli-word-mat.jpg" data-full="images/iste-evidence-ufli-word-mat.jpg" />
+              </div>
+              <p class="photo-caption"><strong>UFLI Word Mat in Literacy Intervention</strong></p>
+            </div>
+            <div class="photo-card">
+              <div class="photo-media">
+                <img alt="The Use of Canva to Create Slides and Resources" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/thumbs/iste-evidence-canva-slides.jpg" data-full="images/iste-evidence-canva-slides.jpg" />
+              </div>
+              <p class="photo-caption"><strong>Canva for Slides &amp; Shared Resources</strong></p>
+            </div>
+            <div class="photo-card">
+              <div class="photo-media">
+                <img alt="The Use of Mentimeter in Parent Workshop" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/thumbs/iste-evidence-mentimeter-parent-workshop.jpg" data-full="images/iste-evidence-mentimeter-parent-workshop.jpg" />
+              </div>
+              <p class="photo-caption"><strong>Mentimeter in Parent Workshop</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="standard-block">
+          <span class="standard-code">2.6.d</span>
+          <div class="standard-title">Model and Nurture Creativity</div>
+          <p class="standard-desc">Model and nurture creativity and creative expression to communicate ideas, knowledge, or connections.</p>
+          <p class="standard-row"><strong>Learner</strong> — model some creative practices.</p>
+
+          <div class="photo-grid">
+            <div class="photo-card">
+              <div class="photo-media">
+                <img alt="Model and Nurture Creativity – Role Play" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/thumbs/iste-evidence-role-play-creativity.jpg" data-full="images/iste-evidence-role-play-creativity.jpg" />
+              </div>
+              <p class="photo-caption"><strong>Role Play — Share, Trade, and Take Turns</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="standard-block">
+          <span class="standard-code">2.6.a</span>
+          <div class="standard-title">Foster Student Ownership of Learning</div>
+          <p class="standard-desc">Foster a culture where students take ownership of their learning goals and outcomes in both independent and group settings.</p>
+          <p class="standard-row"><strong>Learner</strong> — encourages some degree of student ownership.</p>
+
+          <div class="photo-grid">
+            <div class="photo-card">
+              <div class="photo-media">
+                <img alt="Facilitate a Student Initiating and Completing her Classroom Task" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/thumbs/iste-evidence-student-task-initiation.jpg" data-full="images/iste-evidence-student-task-initiation.jpg" />
+              </div>
+              <p class="photo-caption"><strong>Student Initiating and Completing a Classroom Task</strong></p>
+            </div>
+            <div class="photo-card">
+              <div class="photo-media">
+                <img alt="Foster Student Ownership of Learning – Task Initiation and Work Completion" loading="lazy" onerror="this.parentElement.innerHTML='&lt;div class=\'photo-placeholder\'&gt;&lt;span&gt;📷&lt;/span&gt;&lt;span&gt;Photo coming soon&lt;/span&gt;&lt;/div&gt;'" src="images/thumbs/iste-evidence-task-initiation-ownership.jpg" data-full="images/iste-evidence-task-initiation-ownership.jpg" />
+              </div>
+              <p class="photo-caption"><strong>Task Initiation and Work Completion</strong></p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -398,6 +567,37 @@
         hamburger.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCaption = document.getElementById('lbCaption');
+
+    document.querySelectorAll('.photo-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('img');
+        const caption = card.querySelector('.photo-caption');
+        if (!img) return;
+        lbImg.src = img.dataset.full || img.src;
+        lbImg.alt = img.alt;
+        const strong = caption ? caption.querySelector('strong') : null;
+        const title = strong ? strong.textContent : '';
+        const desc = caption ? caption.textContent.replace(title, '').trim() : '';
+        lbCaption.innerHTML = (title ? '<strong>' + title + '</strong>' : '') + (desc || '');
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLb() {
+      lb.classList.remove('active');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('lbClose').addEventListener('click', closeLb);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
   </script>
 
 </body>
